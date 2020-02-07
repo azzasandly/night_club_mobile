@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <form #form="ngForm" (ngSubmit)="login(form)" method="post">
+    <ion-item>
+      <ion-label position="floating">Email</ion-label>
+      <ion-input ngModel type="email" name="email"></ion-input>
+    </ion-item>
+  
+    <ion-item>
+      <ion-label position="floating">Password</ion-label>
+      <ion-input ngModel type="password" name="password"></ion-input>
+    </ion-item>
+  
+    <p class="ion-text-right">Forgot Password?</p>
+  
+    <ion-button type="submit" expand="full" color="primary">Login</ion-button>
+  </form>
+  <p class="ion-text-center">Don't have a account?</p>
+  <ion-button expand="full" color="danger" (click)="registerModal()">Register</ion-button>
+<!-- facebook login-->
+<div class="ion-padding" *ngIf="isLoggedIn === true">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Hi, {{users.name}}</ion-card-subtitle>
+      <ion-card-title>{{users.email}}</ion-card-title>
+    </ion-card-header>
+    <img src="{{users.picture.data.url}}" width="100" alt="{{users.name}}" />
+    <ion-card-content>
+      <p>
+        <ion-button expand="full" color="secondary" (click)="logout()">
+          Logout
+          <ion-icon name="log-out"></ion-icon>
+        </ion-button>
+      </p>
+    </ion-card-content>
+  </ion-card>
+</div>
+<div class="ion-padding" *ngIf="isLoggedIn === false">
+  <ion-button expand="full" color="primary" (click)="fbLogin()">
+    Login with
+    <ion-icon name="logo-facebook"></ion-icon>
+  </ion-button>
+</div>
+</ion-content>

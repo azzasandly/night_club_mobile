@@ -1,0 +1,7 @@
+{
+  "name": "nightclubs",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

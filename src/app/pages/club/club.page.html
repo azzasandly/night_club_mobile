@@ -1,0 +1,76 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title *ngIf="club != undefined" >{{club.name}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-icon style="font-size: 28px;" name="ribbon"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="banier">
+    <img src="../../assets/Pub-banner.jpg"/>
+   </div>
+  <!--Details club-->
+  <div class="details-club">
+    <ion-grid>
+      <ion-row>
+        <ion-col col-2  center text-center>
+          <img class="logo-club" src="{{club.logo}}" width="80" height="80" />
+        </ion-col>
+        <ion-col col-10 >
+
+          <!--
+            <div *ngIf="!le.showMore">
+            {{trimString(le.description,70)}}
+          </div>
+            <div *ngIf="le.showMore">
+            {{le.description}}
+          </div>
+          <a (click)="le.showMore = !le.showMore">Show <span [innerHtml]="le.showMore ? 'less' : 'More'">  </span>
+          </a>-->
+          <ion-row >
+          <h4>{{club.name}}</h4>
+          </ion-row>
+          <div *ngIf="showMore">
+          <ion-row>
+          <ion-label>
+            <ion-icon name="podium" slot="start"></ion-icon>
+            {{club.company_name}}</ion-label>
+          </ion-row>
+          <ion-row>
+            <ion-label *ngIf="location != undefined" >
+              <a>
+              <ion-icon name="pin" slot="start"></ion-icon>
+              {{location.adress}},{{location.city}}
+            </a>
+            </ion-label>
+            </ion-row>
+          </div>
+
+          <ion-row>
+            <a (click)="showMore = !showMore">Show <span [innerHtml]="showMore ? 'less' : 'More'">  </span>
+            </a>
+          </ion-row>
+        </ion-col>
+        </ion-row>
+      </ion-grid>
+  </div>
+  <!--list option club -->
+  <ion-grid>
+    <ion-row>
+      <ion-col col-8 center *ngFor="let lo of listoption">
+        <ion-card (click)='showOption(lo.name)'>
+          <img src="../../../assets/option/{{lo.image}}"  width="150" height="100"/>
+          <ion-card-header>
+            <ion-card-title>{{lo.name}}</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    </ion-grid>
+
+</ion-content>
