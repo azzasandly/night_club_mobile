@@ -4,9 +4,12 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>Night Clubs</ion-title>
-    <ion-buttons slot="end" (click)='getProfile()'>
-      <ion-icon style="font-size: 28px;" name="person"></ion-icon>
+    <ion-buttons slot="end" >
+      <ion-icon style="font-size: 28px;" name="notifications">
+      </ion-icon>
+      <ion-badge class="notifications-badge" color="danger" >4</ion-badge>
     </ion-buttons>
+
   </ion-toolbar>
 </ion-header>
 <ion-content >
@@ -30,16 +33,7 @@
         <ion-label>Check In</ion-label>
       </ion-tab-button>
 
-      <ion-tab-button tab="profile">
-        <ion-icon name="person"></ion-icon>
-        <ion-label>Profile</ion-label>
-      </ion-tab-button>
 
-    <ion-tab-button tab="notification">
-      <ion-badge color="danger" >4</ion-badge>
-      <ion-icon name="notifications"></ion-icon>
-      <ion-label>Notification</ion-label>
-    </ion-tab-button>
   </ion-tab-bar>
   
   </ion-tabs>
