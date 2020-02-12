@@ -39,12 +39,29 @@
             <div> Interest Now</div>
           </ion-button>
           </ion-col>
-          <ion-col center text-center>
-            <ion-button fill="outline" size="small"  color="secondary" (click)='booking(listDetailEvent.event.id,listDetailEvent.event.club_id,nameClub,listDetailEvent.event.started_date?.substr(0,4),listDetailEvent.event.started_date?.substr(5,2))'>
-              <ion-icon name="text"></ion-icon>
-              <div>Book Now</div>
-            </ion-button>
-          </ion-col>
+          <!--button book-->
+          <ion-col center 
+          class="ion-text-center">
+          <div *ngIf="listDetailEvent.event.avaible_for_booking && listDetailEvent.total_person_booking < listDetailEvent.event.max_number_for_booking && !listDetailEvent.user_booked; then avaible else notavaible"></div>
+
+        <ng-template #avaible>
+           <ion-button
+           fill="outline" size="small"  color="secondary" (click)='booking(le.event.id,le.event.club_id,nameClub,le.event.started_date)'>
+             <ion-icon name="text"></ion-icon>
+             <div>Book Now</div>
+           </ion-button>
+       </ng-template>   
+
+        <ng-template #notavaible>
+          <div>
+           <ion-button
+           fill="outline" size="small" disabled="disabled"  color="secondary" >
+             <ion-icon name="text"></ion-icon>
+             <div>Book Now</div>
+           </ion-button>
+          </div> 
+        </ng-template>
+         </ion-col>
         </ion-row>
         <ion-row>
           <ion-col >
