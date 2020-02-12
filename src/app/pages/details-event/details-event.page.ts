@@ -3,6 +3,7 @@ import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
 import { NavExtrasServiceService } from 'src/app/services/navigation/nav-extras-service.service';
 import { ActionSheetController } from '@ionic/angular';
 import { ClubService } from 'src/app/services/club/club.service';
+import { EventService } from 'src/app/services/event/event.service';
 import { AlertService } from 'src/app/services/alert.service';
 
 @Component({
@@ -24,6 +25,7 @@ export class DetailsEventPage  {
     private navExtras: NavExtrasServiceService,
     public actionSheetController: ActionSheetController,
     private clubService: ClubService,
+    private eventService: EventService,
     private alertService: AlertService) {
 
 
@@ -42,7 +44,7 @@ detailEvent(){
       console.log("list ",this.listDetailEvent);
 }
 //add interest to event
-presentActionSheet(id_event: number,event:any){
+presentActionSheet(id_event: number){
   this.event_id = id_event;
   console.log("id_event ",id_event);
   this.actionSheet = this.actionSheetController.create({
@@ -52,7 +54,7 @@ presentActionSheet(id_event: number,event:any){
       icon: 'star',
       handler: () => {
         //save action 
-        this.clubService.interestEvent(id_event,'interested').subscribe(
+        this.eventService.interestEvent(id_event,'interested').subscribe(
           data => {
             this.alertService.presentToast(data['message']);
 
@@ -71,7 +73,7 @@ presentActionSheet(id_event: number,event:any){
       icon: 'checkmark-circle',
       handler: () => {
         //save action 
-        this.clubService.interestEvent(id_event,'going').subscribe(
+        this.eventService.interestEvent(id_event,'going').subscribe(
           data => {
             this.alertService.presentToast(data['message']);
 
@@ -90,7 +92,7 @@ presentActionSheet(id_event: number,event:any){
       icon: 'close',
       handler: () => {
         //save action 
-        this.clubService.interestEvent(id_event,'not_going').subscribe(
+        this.eventService.interestEvent(id_event,'not_going').subscribe(
           data => {
             this.alertService.presentToast(data['message']);
 
@@ -112,7 +114,7 @@ presentActionSheet(id_event: number,event:any){
 }
 refreshevent(){
     //get list event
-    this.clubService.listEvent(this.id_club).subscribe(
+    this.eventService.listEvent(this.id_club).subscribe(
       data => {
         console.log('other data event ',data);
         this.dataEvent = data;
@@ -132,7 +134,7 @@ refreshevent(){
 
 }
 //add booking
-booking(id_event:number, id_club:number,nameclu: string,years:string,month:string){
+booking(id_event:number, id_club:number,nameclu: string,started_date_event:string){
   //send detail event in params
   let navigationExtras: NavigationExtras = {
    queryParams: {
@@ -140,8 +142,7 @@ booking(id_event:number, id_club:number,nameclu: string,years:string,month:strin
      bookingFor: 'events',
      idClub: id_club,
      nameClub:nameclu,
-     years:years,
-     month:month
+     started_date_event:started_date_event
      }
  };
  //navigate to page details event

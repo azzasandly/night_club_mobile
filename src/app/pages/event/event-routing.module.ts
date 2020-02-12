@@ -6,7 +6,8 @@ import { EventPage } from './event.page';
 const routes: Routes = [
   {
     path: '',
-    component: EventPage
+    component: EventPage,
+    
   }
 ];
 

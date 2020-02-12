@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { DashboardPageRoutingModule } from './dashboard-routing.module';
 
 import { DashboardPage } from './dashboard.page';
+import { CustomTabsComponent } from 'src/app/components/custom-tabs/custom-tabs.component';
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import { DashboardPage } from './dashboard.page';
     IonicModule,
     DashboardPageRoutingModule
   ],
-  declarations: [DashboardPage]
+  entryComponents: [CustomTabsComponent],
+  declarations: [DashboardPage, CustomTabsComponent]
 })
 export class DashboardPageModule {}

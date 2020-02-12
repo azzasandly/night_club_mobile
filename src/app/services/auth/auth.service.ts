@@ -25,7 +25,7 @@ export class AuthService {
     private navExtras: NavExtrasServiceService,
   ) {   }
   login(email: String, password: String) {
-    return this.http.post(this.env.API_URL + 'auth/login',
+    return this.http.post(this.env.API_URL_AUTH + 'login',
       {email: email, password: password}
     ).pipe(
       tap(token => {
@@ -73,7 +73,7 @@ this.secureStorage.create('my_store_name')
   }
 
   register(fName: String, lName: String, tel: number, email: String, password: String) {
-    return this.http.post(this.env.API_URL + 'auth/register',
+    return this.http.post(this.env.API_URL_AUTH + 'register',
       {fName: fName, lName: lName,tel: tel, email: email, password: password}
     )
   }
@@ -82,7 +82,7 @@ this.secureStorage.create('my_store_name')
     const headers = new HttpHeaders({
       'Authorization': this.token["token_type"]+" "+this.token["access_token"]
     });
-    return this.http.get(this.env.API_URL + 'auth/logout', { headers: headers })
+    return this.http.get(this.env.API_URL_AUTH + 'logout', { headers: headers })
     .pipe(
       tap(data => {
         this.storage.remove("storage");

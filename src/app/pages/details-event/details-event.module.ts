@@ -7,6 +7,8 @@ import { IonicModule } from '@ionic/angular';
 import { DetailsEventPageRoutingModule } from './details-event-routing.module';
 
 import { DetailsEventPage } from './details-event.page';
+import { CustomCardDetailsComponent } from 'src/app/components/custom-card-details/custom-card-details.component';
+
 
 @NgModule({
   imports: [
@@ -15,6 +17,7 @@ import { DetailsEventPage } from './details-event.page';
     IonicModule,
     DetailsEventPageRoutingModule
   ],
-  declarations: [DetailsEventPage]
+  entryComponents: [CustomCardDetailsComponent],
+  declarations: [DetailsEventPage, CustomCardDetailsComponent]
 })
 export class DetailsEventPageModule {}

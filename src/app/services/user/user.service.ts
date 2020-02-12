@@ -35,7 +35,7 @@ export class UserService {
     const headers = new HttpHeaders({
       'Authorization': this.token["token_type"]+" "+this.token["access_token"]
     });
-    return this.http.get<User>(this.env.API_URL + 'user/profile', { headers: headers })
+    return this.http.get<User>(this.env.API_URL_USER + 'profile', { headers: headers })
     .pipe(
       tap(user => {
         return user;
@@ -47,7 +47,7 @@ export class UserService {
     const headers = new HttpHeaders({
       'Authorization': this.token["token_type"]+" "+this.token["access_token"]
     });
-    return this.http.get<Club>(this.env.API_URL + 'user/club', { headers: headers })
+    return this.http.get<Club>(this.env.API_URL_USER + 'club', { headers: headers })
     .pipe(
       tap(club => {
         return club;
@@ -59,7 +59,7 @@ export class UserService {
     const headers = new HttpHeaders({
       'Authorization': this.token["token_type"]+" "+this.token["access_token"]
     });
-    return this.http.get<Centerinterer>(this.env.API_URL + 'user/centerinterer', { headers: headers })
+    return this.http.get<Centerinterer>(this.env.API_URL_USER + 'centerinterer', { headers: headers })
     .pipe(
       tap(centerinterer => {
         return centerinterer;
@@ -75,7 +75,7 @@ export class UserService {
     let postdata = JSON.stringify({
       idclubs
     });
-    return this.http.post(this.env.API_URL + 'user/userclub',
+    return this.http.post(this.env.API_URL_USER + 'userclub',
       {idclub:postdata},{ headers: headers }
     )
   }
@@ -89,7 +89,7 @@ export class UserService {
       idcenterinterers
     });
     console.log('postdata service ',postdata);
-    return this.http.post(this.env.API_URL + 'user/userinterer',
+    return this.http.post(this.env.API_URL_USER + 'userinterer',
       {idcenterinterer:postdata},{ headers: headers }
     )
   }
@@ -98,7 +98,7 @@ export class UserService {
     const headers = new HttpHeaders({
       'Authorization': this.token["token_type"]+" "+this.token["access_token"]
     });
-    return this.http.get<Club>(this.env.API_URL + 'user/listclubuser', { headers: headers })
+    return this.http.get<Club>(this.env.API_URL_USER + 'listclubuser', { headers: headers })
     .pipe(
       tap(club => {
         return club;
@@ -110,7 +110,7 @@ export class UserService {
     const headers = new HttpHeaders({
       'Authorization': this.token["token_type"]+" "+this.token["access_token"]
     });
-    return this.http.get<Club>(this.env.API_URL + 'user/restlistclubuser', { headers: headers })
+    return this.http.get<Club>(this.env.API_URL_USER + 'restlistclubuser', { headers: headers })
     .pipe(
       tap(club => {
         return club;
@@ -122,7 +122,7 @@ export class UserService {
     const headers = new HttpHeaders({
       'Authorization': this.token["token_type"]+" "+this.token["access_token"]
     });
-    return this.http.post(this.env.API_URL + 'user/updateprofile',
+    return this.http.post(this.env.API_URL_USER + 'updateprofile',
       {fName: fName, lName: lName,tel: tel},{ headers: headers }
     )
   }

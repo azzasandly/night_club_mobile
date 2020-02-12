@@ -1,0 +1,97 @@
+<!-- custom card list event-->
+      <ion-card *ngIf="listEvent != undefined">
+        <img src="{{listEvent.event.image}}" width="150" height="130" (click)='detailEvent(listEvent)'/>
+        <ion-card-header  (click)='detailEvent(listEvent)'>
+          <ion-card-title>{{listEvent.event.title}}</ion-card-title>
+          <ion-card-subtitle>
+            <ion-row>
+              <ion-col>
+              <ion-label>
+                <ion-icon name="time" slot="start"></ion-icon>
+
+                {{listEvent.event.started_date?.substr(0,10)}} at {{listEvent.event.started_date?.substr(11,5)}} PM 
+                - {{listEvent.event.ending_date?.substr(11,5)}} AM
+              
+              </ion-label>
+              </ion-col>
+            </ion-row>
+
+            <ion-row>
+              <ion-col col-10>
+              <ion-label>
+                <ion-icon name="pin" slot="start"></ion-icon>
+                {{listEvent.event.location['state']}},{{listEvent.event.location['city']}}
+              </ion-label>
+              </ion-col>
+              <ion-col col-2 class="ion-text-right">
+                <ion-label >
+                  <a >Show Map</a>
+                </ion-label>
+                </ion-col>
+              </ion-row>
+            
+          </ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content (click)='detailEvent(listEvent)'>
+
+          <div>
+            {{trimString(listEvent.event.description,70)}}
+          </div>
+        </ion-card-content>
+        <ion-footer>
+          <ion-row>
+            <ion-col center class="ion-text-center" >
+              <!--button intersted-->
+              <ion-button *ngIf="listEvent.user_action === 'interested'" fill="solid" size="small"  color="primary" (click)='presentActionSheet(listEvent.event.id)'>
+                <ion-icon  name="star"></ion-icon>
+                <div >{{listEvent.user_action}}</div>
+              
+              </ion-button>
+              <!--button going-->
+              <ion-button *ngIf="listEvent.user_action === 'going'" fill="solid" size="small"  color="primary" (click)='presentActionSheet(listEvent.event.id)'>
+                <ion-icon  name="checkmark-circle"></ion-icon>
+                <div>{{listEvent.user_action}}</div>
+              </ion-button>
+              <!--button not going-->
+              <ion-button *ngIf="listEvent.user_action === 'not_going'" fill="solid" size="small"  color="primary" (click)='presentActionSheet(listEvent.event.id)'>
+                <ion-icon name="close"></ion-icon>
+                <div>Not Going</div>
+                </ion-button>
+              <!--button default-->
+              <ion-button *ngIf="!listEvent.user_action" fill="outline" size="small"  color="secondary" (click)='presentActionSheet(listEvent.event.id)'>
+                <ion-icon name="star"></ion-icon>
+                <div> Interest Now</div>
+              </ion-button>
+
+            </ion-col>
+            <ion-col center 
+             class="ion-text-center">
+
+             <div *ngIf="listEvent.event.avaible_for_booking && listEvent.total_person_booking < listEvent.event.max_number_for_booking && !listEvent.user_booked; then avaible else notavaible"></div>
+
+           <ng-template #avaible>
+
+              <ion-button
+              fill="outline" size="small"  color="secondary" (click)='booking(listEvent.event.id,listEvent.event.club_id,listEvent.event.started_date)'>
+                <ion-icon name="text"></ion-icon>
+                <div>Book Now</div>
+              </ion-button>
+
+          </ng-template>   
+
+           <ng-template #notavaible>
+
+              <ion-button
+              fill="outline" size="small" disabled="disabled"  color="secondary" >
+                <ion-icon name="text"></ion-icon>
+                <div>Book Now</div>
+              </ion-button>
+
+           </ng-template>
+            </ion-col>
+          </ion-row>
+        </ion-footer>
+      </ion-card>
+<!-- custom card list program-->
+
+<!-- custom card list promos-->

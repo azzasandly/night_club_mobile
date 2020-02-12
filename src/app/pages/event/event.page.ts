@@ -3,6 +3,7 @@ import { MenuController, NavController } from '@ionic/angular';
 import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
 import { AlertService } from 'src/app/services/alert.service';
 import { ClubService } from 'src/app/services/club/club.service';
+import { EventService } from 'src/app/services/event/event.service';
 import { NavExtrasServiceService } from 'src/app/services/navigation/nav-extras-service.service';
 import { ActionSheetController } from '@ionic/angular';
 
@@ -21,6 +22,7 @@ export class EventPage   {
 
   constructor(private menu: MenuController,
     private clubService: ClubService,
+    private eventService: EventService,
     private route: ActivatedRoute,
     private router: Router,
     private alertService: AlertService,
@@ -51,7 +53,7 @@ ListEvent(){
         this.nameClub = res['name'];
     });
     //get list event
-  this.clubService.listEvent(this.id_club).subscribe(
+  this.eventService.listEvent(this.id_club).subscribe(
     data => {
       console.log('data event ',data);
       this.listEvent = data;
@@ -65,11 +67,6 @@ ListEvent(){
   );
 }
 
-trimString(string, length) {
-  return string.length > length
-    ? string.substring(0, length) + "..."
-    : string;
-}
 
 detailEvent(levent: any , nameclu){
   this.navExtras.setExtras(levent);
@@ -95,7 +92,7 @@ presentActionSheet(id_event: number){
       icon: 'star',
       handler: () => {
         //save action 
-        this.clubService.interestEvent(id_event,'interested').subscribe(
+        this.eventService.interestEvent(id_event,'interested').subscribe(
           data => {
             this.alertService.presentToast(data['message']);
 
@@ -115,7 +112,7 @@ presentActionSheet(id_event: number){
       icon: 'checkmark-circle',
       handler: () => {
         //save action 
-        this.clubService.interestEvent(id_event,'going').subscribe(
+        this.eventService.interestEvent(id_event,'going').subscribe(
           data => {
             this.alertService.presentToast(data['message']);
 
@@ -134,7 +131,7 @@ presentActionSheet(id_event: number){
       icon: 'close',
       handler: () => {
         //save action 
-        this.clubService.interestEvent(id_event,'not_going').subscribe(
+        this.eventService.interestEvent(id_event,'not_going').subscribe(
           data => {
             this.alertService.presentToast(data['message']);
 

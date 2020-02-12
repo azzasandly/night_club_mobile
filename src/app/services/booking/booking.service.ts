@@ -8,10 +8,12 @@ import { Club } from '../../models/club';
 import { tap } from 'rxjs/operators';
 import { NavExtrasServiceService } from '../navigation/nav-extras-service.service';
 
+
 @Injectable({
   providedIn: 'root'
 })
-export class ClubService {
+export class BookingService {
+
   isLoggedIn = false;
   token:any;
   
@@ -22,19 +24,30 @@ export class ClubService {
     private authService: AuthService,
     private navExtras: NavExtrasServiceService,) { }
 
-  //details club
-  showClub(id_club: number) {
+  //add booking events
+  bookingEvent(idClub: number,
+    nbParticipents: number,
+    bookingDate: string,
+    bookingFor: string,
+    bookingForId: number,
+    comment:string
+    ) {
     this.token = this.navExtras.getTokenSer();
     const headers = new HttpHeaders({
       'Authorization': this.token["token_type"]+" "+this.token["access_token"]
     });
-    return this.http.post(this.env.API_URL_CLUB + 'show',
-    {idclub:id_club}, { headers: headers })
+    return this.http.post(this.env.API_URL_BOOKING + 'addbooking',
+    {idClub:idClub,
+    nbParticipents:nbParticipents,
+    bookingDate:bookingDate,
+    bookingFor:bookingFor,
+    bookingForId:bookingForId,
+    comment:comment,
+    }, { headers: headers })
     .pipe(
-      tap(club => {
-        return club;
+      tap(booking => {
+        return booking;
       })
     )
   }
-
 }

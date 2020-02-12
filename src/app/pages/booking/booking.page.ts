@@ -3,6 +3,7 @@ import { MenuController, NavController } from '@ionic/angular';
 import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
 import { AlertService } from '../../services/alert.service';
 import { ClubService } from '../../services/club/club.service';
+import { BookingService } from '../../services/booking/booking.service';
 import { NavExtrasServiceService } from '../../services/navigation/nav-extras-service.service';
 import { NgForm } from '@angular/forms';
 
@@ -20,6 +21,7 @@ export class BookingPage  {
   date_event:any;
   constructor( private menu: MenuController,
     private clubService: ClubService,
+    private bookingService: BookingService,
     private route: ActivatedRoute,
     private router: Router,
     private alertService: AlertService,
@@ -64,7 +66,7 @@ export class BookingPage  {
       else{
     
     //get list event
-    this.clubService.bookingEvent(this.idClub,
+    this.bookingService.bookingEvent(this.idClub,
       form.value.nbparticipent,
       this.datebooking,
       this.bookingFor,
