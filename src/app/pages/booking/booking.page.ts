@@ -17,8 +17,7 @@ export class BookingPage  {
   idClub: number;
   nameClub:string;
   datebooking:any;
-  years:any;
-  month:any;
+  date_event:any;
   constructor( private menu: MenuController,
     private clubService: ClubService,
     private route: ActivatedRoute,
@@ -30,65 +29,63 @@ export class BookingPage  {
 
     }
 
-ionViewWillEnter() {
-  //get inform from params
-  this.route.queryParams.subscribe((res)=>{
-    this.idClub = res['idClub'];
-    this.nameClub = res['nameClub'];
-    this.bookingForid = res['bookingForid'];
-    this.bookingFor = res['bookingFor'];
-    this.years = res['years'];
-    this.month = res['month'];
-  });
-}
+    ionViewWillEnter() {
+      //get inform from params
+      this.route.queryParams.subscribe((res)=>{
+        console.log('aram booking ',res);
+        this.idClub = res['idClub'];
+        this.nameClub = res['nameClub'];
+        this.bookingForid = res['bookingForid'];
+        this.bookingFor = res['bookingFor'];
+        this.date_event = res['started_date_event'];
+      });
+    }
 
-updateDateTime(event:any){
-  console.log('event ',event);
-  let rep1 = event.target.value.replace("T", " ");
-  let rep2 = rep1.substr(0, 16);
-  console.log('rep2 ',rep2);
-  this.datebooking = rep2;
-}
+    updateDateTime(event:any){
+      console.log('event ',event);
+      let rep1 = event.target.value.substr(11, 5);
+      console.log('rep1 ',rep1);
+      let dateEve = this.date_event.substr(0, 10);
+      console.log('date event ',dateEve);
+      this.datebooking = dateEve +" " +rep1;
+      console.log('date booking ',this.datebooking);
+    }
 
-AddBooking(form: NgForm){
+    AddBooking(form: NgForm){
 
-  if (form.value.nbparticipent == "")
-  {
-    this.alertService.presentToast("Number of particpents required");
-  }
-  else if (this.datebooking == "")
-  {
-    this.alertService.presentToast("Date booking required");
-  }
-  else if (form.value.comment == "")
-  {
-    this.alertService.presentToast("Comment required");
-  }
-  else{
-
-//get list event
-this.clubService.bookingEvent(this.idClub,
-  form.value.nbparticipent,
-  this.datebooking,
-  this.bookingFor,
-  this.bookingForid,
-  form.value.comment,
-  
-  ).subscribe(
-data => {
-  this.alertService.presentToast(data['message']);
-  //redirect to page home
-this.router.navigate(['/dashboard']);
-},
-error => {
-  console.log(error);
-  this.alertService.presentToast(error.error.message);
-},
-() => {
-}
-);
-  }
-
-}
+      if (form.value.nbparticipent == "")
+      {
+        this.alertService.presentToast("Number of particpents required");
+      }
+      else if (this.datebooking == "")
+      {
+        this.alertService.presentToast("Date booking required");
+      }
+      else{
+    
+    //get list event
+    this.clubService.bookingEvent(this.idClub,
+      form.value.nbparticipent,
+      this.datebooking,
+      this.bookingFor,
+      this.bookingForid,
+      form.value.comment,
+      
+      ).subscribe(
+    data => {
+      this.alertService.presentToast(data['message']);
+      //redirect to page home
+    this.router.navigate(['/dashboard']);
+    },
+    error => {
+      console.log(error);
+      this.alertService.presentToast(error.error.message);
+    },
+    () => {
+    }
+    );
+      }
+    
+    }
 
 }

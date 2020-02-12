@@ -153,21 +153,20 @@ presentActionSheet(id_event: number){
     actionsheet.present();
   });
 }
-//add booking
-booking(id_event:number, id_club:number,nameclu: string,years:string,month:string){
- //send detail event in params
- let navigationExtras: NavigationExtras = {
-  queryParams: {
-    bookingForid: id_event,
-    bookingFor: 'events',
-    idClub: id_club,
-    nameClub:nameclu,
-    years:years,
-    month:month
+  //add booking
+  booking(id_event:number, id_club:number,nameclu: string,started_date_event:string){
+    //send detail event in params
+    let navigationExtras: NavigationExtras = {
+      queryParams: {
+        bookingForid: id_event,
+        bookingFor: 'events',
+        idClub: id_club,
+        nameClub:nameclu,
+        started_date_event:started_date_event
+        }
+    };
+    //navigate to page details event
+    this.router.navigate(['/booking'],navigationExtras);
+  
     }
-};
-//navigate to page details event
-this.router.navigate(['/booking'],navigationExtras);
-
-}
 }

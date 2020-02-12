@@ -19,13 +19,13 @@
     </ion-item>
   
     <ion-item>
-      <ion-label position="floating">Date Booking</ion-label>
+      <ion-label position="floating">Time Booking</ion-label>
       <ion-datetime 
-      display-format="YYYY-MM-DD HH:mm" 
-      picker-format="YYYY-MM-DD HH:mm" 
-      placeholder="YYYY-MM-DD HH:mm"
-      yearValues="{{years}}"
-      monthValues="{{month}}"
+      display-format="HH:mm" 
+      picker-format="HH:mm" 
+      placeholder="HH:mm"
+      minuteValues="00,05,10,15,20,25,30,35,40,45,50,55"
+      hourValues="17,18,19,20,21"
       (ionChange)="updateDateTime($event)">
       </ion-datetime>
         </ion-item>
