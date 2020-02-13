@@ -16,10 +16,11 @@ import { SecureStorage } from '@ionic-native/secure-storage/ngx';
 import { Tab1PageModule } from './pages/tab1/tab1.module';
 //import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MapComponent } from 'src/app/components/map/map.component';
 
 @NgModule({
-  declarations: [AppComponent],
-  entryComponents: [],
+  declarations: [AppComponent,MapComponent],
+  entryComponents: [MapComponent],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),

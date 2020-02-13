@@ -43,7 +43,7 @@
           </ion-row>
           <ion-row>
             <ion-label *ngIf="location != undefined" >
-              <a>
+              <a (click)='showMap()' >
               <ion-icon name="pin" slot="start"></ion-icon>
               {{location.adress}},{{location.city}}
             </a>
@@ -57,8 +57,10 @@
           </ion-row>
         </ion-col>
         </ion-row>
+
       </ion-grid>
   </div>
+
   <!--list option club -->
   <ion-grid>
     <ion-row>
