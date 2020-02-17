@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { MenuController, NavController } from '@ionic/angular';
+import { MenuController, NavController, PopoverController } from '@ionic/angular';
 import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
 import { AlertService } from 'src/app/services/alert.service';
 import { ClubService } from 'src/app/services/club/club.service';
 import { EventService } from 'src/app/services/event/event.service';
 import { NavExtrasServiceService } from 'src/app/services/navigation/nav-extras-service.service';
 import { ActionSheetController } from '@ionic/angular';
+import { MapComponent } from 'src/app/components/map/map.component';
 
 @Component({
   selector: 'app-event',
@@ -28,7 +29,8 @@ export class EventPage   {
     private alertService: AlertService,
     private navCtrl: NavController,
     private navExtras: NavExtrasServiceService,
-    public actionSheetController: ActionSheetController) { 
+    public actionSheetController: ActionSheetController,
+    public popoverCtrl: PopoverController) { 
       this.menu.enable(true);
 
       this.listEvent = this.listEvent.map(item => (
@@ -67,6 +69,19 @@ ListEvent(){
   );
 }
 
+/*async showMap(ev: any){
+  const popover = await this.popoverCtrl.create({  
+    component: MapComponent,  
+    componentProps: {latitude: this.location.latitude,
+                      longitude: this.location.longitude,
+                      locationName: this.location.location_name
+    } ,
+    event: ev,  
+    animated: true,  
+    showBackdrop: true,
+});  
+return await popover.present();  
+}*/
 
 detailEvent(levent: any , nameclu){
   this.navExtras.setExtras(levent);

@@ -51,10 +51,10 @@ users = { id: '', name: '', email: '', picture: { data: { url: '' } } };
         //test user 
         this.userService.user().subscribe(
           user => {
-            console.log('uc ',user.idUserClub);
-            console.log('ui ',user.idUserInterer);
+            console.log('uc ',user.user_club_id);
+            console.log('ui ',user.user_center_interest_id);
             //if userclub or userinterer null
-            if( ((user.idUserClub == null) || (user.idUserInterer == null)) || ((user.idUserClub == null) && (user.idUserInterer == null)) ) {
+            if( ((user.user_club_id == null) || (user.user_center_interest_id == null)) || ((user.user_club_id == null) && (user.user_center_interest_id == null)) ) {
               //redirect to page check list club & ineterer
     
               this.router.navigate(['/checklist']);
@@ -93,26 +93,30 @@ users = { id: '', name: '', email: '', picture: { data: { url: '' } } };
       data => {
         console.log('data login ',data);
         this.alertService.presentToast("Logged In");
+
       },
       error => {
         console.log(error);
         this.alertService.presentToast(error.error.message);
       },
       () => {
-        //test user 
-        this.userService.user().subscribe(
-          user => {
-            //if userclub or userinterer null
-            if( ((user.idUserClub == null) || (user.idUserInterer == null)) || ((user.idUserClub == null) && (user.idUserInterer == null)) ) {
-              //redirect to page check list club & ineterer
-              this.router.navigate(['/checklist']);
-            }
-            else {
-              //redirect to dashbord
-              this.router.navigate(['/dashboard']);
-            }
+      //test user 
+      this.userService.user().subscribe(
+        user => {
+          console.log(' user test ',user);
+          //if userclub or userinterer null
+          if( ((user.user_club_id == null) || (user.user_center_interest_id == null)) || ((user.user_club_id == null) && (user.user_center_interest_id == null)) ) {
+            //redirect to page check list club & ineterer
+            console.log('user_club_id ',user.user_club_id);
+            console.log('user_center_interest_id ',user.user_center_interest_id);
+            this.router.navigate(['/checklist']);
           }
-        );
+          else {
+            //redirect to dashbord
+            this.router.navigate(['/dashboard']);
+          }
+        }
+      );
       }
     );
   }

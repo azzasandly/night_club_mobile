@@ -1,5 +1,5 @@
 export class UserCenterInterer {
     id: number;
-    idUser: number;
-    idCenterInterer: number[];
+    user_id: number;
+    center_interest_id: number[];
 }

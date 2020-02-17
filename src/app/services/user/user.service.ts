@@ -59,10 +59,10 @@ export class UserService {
     const headers = new HttpHeaders({
       'Authorization': this.token["token_type"]+" "+this.token["access_token"]
     });
-    return this.http.get<Centerinterer>(this.env.API_URL_USER + 'centerinterer', { headers: headers })
+    return this.http.get<Centerinterer>(this.env.API_URL_USER + 'centerinterest', { headers: headers })
     .pipe(
-      tap(centerinterer => {
-        return centerinterer;
+      tap(centerinterest => {
+        return centerinterest;
       })
     )
   }
@@ -79,18 +79,18 @@ export class UserService {
       {idclub:postdata},{ headers: headers }
     )
   }
-  addcenterinterer(idcenterinterers:Array<number>) {
+  addcenterinterer(idcenterinterest:Array<number>) {
     this.token = this.navExtras.getTokenSer();
-    console.log('idcenterinterer service ',idcenterinterers);
+    console.log('idcenterinterer service ',idcenterinterest);
     const headers = new HttpHeaders({
       'Authorization': this.token["token_type"]+" "+this.token["access_token"]
     });
     let postdata = JSON.stringify({
-      idcenterinterers
+      idcenterinterest
     });
     console.log('postdata service ',postdata);
-    return this.http.post(this.env.API_URL_USER + 'userinterer',
-      {idcenterinterer:postdata},{ headers: headers }
+    return this.http.post(this.env.API_URL_USER + 'userinterest',
+      {idcenterinterest:postdata},{ headers: headers }
     )
   }
   ListUserClub() {

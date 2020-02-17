@@ -116,10 +116,10 @@ export class ChecklistPage  {
 }
   getListcenterinterer(){
   this.userService.centerinterer().subscribe(
-    centerinterer => {
-      this.centerinterer = centerinterer;
-      console.log('center interer',centerinterer);
-      this.centerinterer = centerinterer;
+    centerinterest => {
+      console.log('center intere',centerinterest);
+      this.centerinterer = centerinterest;
+
     }
   );
 }

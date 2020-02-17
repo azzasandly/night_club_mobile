@@ -4,6 +4,6 @@ export class User {
     last_name: string;
     tel: number;
     email: string;
-    idUserClub: number;
-    idUserInterer: number;
+    user_club_id: number;
+    user_center_interest_id: number;
 }
