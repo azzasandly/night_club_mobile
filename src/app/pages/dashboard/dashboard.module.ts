@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { DashboardPageRoutingModule } from './dashboard-routing.module';
 
 import { DashboardPage } from './dashboard.page';
+import { ComponentsModule } from '../../components/components.module';
 
 
 @NgModule({
@@ -14,6 +15,7 @@ import { DashboardPage } from './dashboard.page';
     CommonModule,
     FormsModule,
     IonicModule,
+    ComponentsModule,
     DashboardPageRoutingModule
   ],
   entryComponents: [],

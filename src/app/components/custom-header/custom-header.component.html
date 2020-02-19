@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button 
+      *ngIf="icon_left === 'menu'"></ion-menu-button>
+
+      <ion-icon style="font-size: 24px;"
+       *ngIf="icon_left === 'back'" 
+       name="arrow-round-back" (click)="goBack()">
+      </ion-icon>
+      
+       </ion-buttons>
+
+    <ion-title class="ion-text-center">{{title}}</ion-title>
+
+    <ion-buttons slot="end" >
+
+      <div class="notification" 
+      *ngIf="icon_right === 'notification'">
+
+      <ion-icon style="font-size: 28px;"
+       name="notifications">
+      </ion-icon>
+
+      <ion-badge class="notifications-badge" 
+      color="danger" >4</ion-badge>
+
+      </div>
+
+      <ion-icon style="font-size: 24px;" 
+      *ngIf="icon_right === 'ribbon'" name="ribbon"></ion-icon>
+
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>

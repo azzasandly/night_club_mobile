@@ -73,12 +73,12 @@
         <ion-col col-10>
         <ion-label>
           <ion-icon name="pin" slot="start"></ion-icon>
-          {{listDetailEvent.event.location['state']}},{{listDetailEvent.event.location['city']}}
+          {{listDetailEvent.event.location['adress']}},{{listDetailEvent.event.location['city']}}
         </ion-label>
         </ion-col>
         <ion-col col-2 class="ion-text-right">
           <ion-label >
-            <a href="" >Show Map</a>
+            <a (click)='showMap(listDetailEvent.event.location)'>Show Map</a>
           </ion-label>
           </ion-col>
         </ion-row>

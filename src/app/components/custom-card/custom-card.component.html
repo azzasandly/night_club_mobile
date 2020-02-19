@@ -1,10 +1,10 @@
 <!-- custom card list event-->
       <ion-card *ngIf="listEvent != undefined">
         <img src="{{listEvent.event.image}}" width="150" height="130" (click)='detailEvent(listEvent)'/>
-        <ion-card-header  (click)='detailEvent(listEvent)'>
-          <ion-card-title>{{listEvent.event.title}}</ion-card-title>
+        <ion-card-header  >
+          <ion-card-title (click)='detailEvent(listEvent)'>{{listEvent.event.title}}</ion-card-title>
           <ion-card-subtitle>
-            <ion-row>
+            <ion-row (click)='detailEvent(listEvent)'>
               <ion-col>
               <ion-label>
                 <ion-icon name="time" slot="start"></ion-icon>
@@ -19,13 +19,15 @@
             <ion-row>
               <ion-col col-10>
               <ion-label>
-                <ion-icon name="pin" slot="start"></ion-icon>
-                {{listEvent.event.location['state']}},{{listEvent.event.location['city']}}
+
+                  <ion-icon name="pin" slot="start"></ion-icon>
+                  {{listEvent.event.location['adress']}},{{listEvent.event.location['city']}}
+               
               </ion-label>
               </ion-col>
               <ion-col col-2 class="ion-text-right">
                 <ion-label >
-                  <a >Show Map</a>
+                  <a (click)='showMap(listEvent.event.location)'>Show Map</a>
                 </ion-label>
                 </ion-col>
               </ion-row>

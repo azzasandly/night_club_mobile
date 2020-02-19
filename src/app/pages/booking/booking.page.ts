@@ -19,7 +19,7 @@ export class BookingPage  {
   nameClub:string;
   datebooking:any;
   date_event:any;
-  constructor( private menu: MenuController,
+  constructor(
     private clubService: ClubService,
     private bookingService: BookingService,
     private route: ActivatedRoute,
@@ -27,7 +27,6 @@ export class BookingPage  {
     private alertService: AlertService,
     private navCtrl: NavController,
     private navExtras: NavExtrasServiceService){ 
-      this.menu.enable(true);
 
     }
 

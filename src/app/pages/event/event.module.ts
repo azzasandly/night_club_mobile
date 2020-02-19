@@ -8,6 +8,7 @@ import { EventPageRoutingModule } from './event-routing.module';
 
 import { EventPage } from './event.page';
 import { CustomCardComponent } from 'src/app/components/custom-card/custom-card.component';
+import { ComponentsModule } from '../../components/components.module';
 
 
 @NgModule({
@@ -15,6 +16,7 @@ import { CustomCardComponent } from 'src/app/components/custom-card/custom-card.
     CommonModule,
     FormsModule,
     IonicModule,
+    ComponentsModule,
     EventPageRoutingModule
   ],
   entryComponents: [CustomCardComponent],

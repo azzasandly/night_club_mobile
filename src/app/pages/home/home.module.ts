@@ -4,10 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { ClubPageRoutingModule } from './club-routing.module';
-
-import { ClubPage } from './club.page';
+import { HomePageRoutingModule } from './home-routing.module';
 import { ComponentsModule } from '../../components/components.module';
+import { HomePage } from './home.page';
 
 @NgModule({
   imports: [
@@ -15,9 +14,8 @@ import { ComponentsModule } from '../../components/components.module';
     FormsModule,
     IonicModule,
     ComponentsModule,
-    ClubPageRoutingModule
+    HomePageRoutingModule
   ],
-  entryComponents: [],
-  declarations: [ClubPage]
+  declarations: [HomePage]
 })
-export class ClubPageModule {}
+export class HomePageModule {}

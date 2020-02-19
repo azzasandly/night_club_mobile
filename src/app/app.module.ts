@@ -17,11 +17,11 @@ import { Tab1PageModule } from './pages/tab1/tab1.module';
 //import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MapComponent } from 'src/app/components/map/map.component';
-import { CustomTabsComponent } from 'src/app/components/custom-tabs/custom-tabs.component';
+
 
 @NgModule({
-  declarations: [AppComponent,MapComponent,CustomTabsComponent],
-  entryComponents: [MapComponent, CustomTabsComponent],
+  declarations: [AppComponent,MapComponent],
+  entryComponents: [MapComponent],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),

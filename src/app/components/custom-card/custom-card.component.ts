@@ -1,6 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NavExtrasServiceService } from 'src/app/services/navigation/nav-extras-service.service';
 import { EventPage } from 'src/app/pages/event/event.page';
+import { MapComponent } from '../map/map.component';
+import { PopoverController } from '@ionic/angular';
+
 
 
 @Component({
@@ -17,6 +20,7 @@ export class CustomCardComponent implements OnInit {
 
   constructor( private navExtras: NavExtrasServiceService,
     private eventPage:EventPage,
+    public popoverCtrl: PopoverController
     ) { }
 
   ngOnInit() {}
@@ -37,5 +41,19 @@ export class CustomCardComponent implements OnInit {
   //add booking
   booking(id_event:number, id_club:number,started_date_event:string){
     this.eventPage.booking(id_event,id_club,this.nameClub,started_date_event);
+    }
+
+    async showMap(ev: any){
+      console.log('ev ',ev);
+      const popover = await this.popoverCtrl.create({  
+        component: MapComponent,  
+        componentProps: {latitude: ev.latitude,
+          longitude: ev.longitude,
+          locationName: ev.location_name} ,
+        event: ev,  
+        animated: true,  
+        showBackdrop: true,
+    });  
+    return await popover.present();  
     }
 }

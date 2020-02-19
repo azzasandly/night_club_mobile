@@ -1,31 +1,25 @@
-import { Component } from '@angular/core';
+import { Component  } from '@angular/core';
 import { UserService } from '../../services/user/user.service';
 import { User } from '../../models/user';
-import { Club } from '../../models/club';
-import { AlertService } from 'src/app/services/alert.service';
-import { NavController, ModalController } from '@ionic/angular';
-import { DashboardPage } from '../dashboard/dashboard.page';
 import { Router, NavigationExtras } from '@angular/router';
-
+import { AlertService } from '../../services/alert.service';
 @Component({
-  selector: 'app-tab1',
-  templateUrl: 'tab1.page.html',
-  styleUrls: ['tab1.page.scss']
+  selector: 'app-home',
+  templateUrl: './home.page.html',
+  styleUrls: ['./home.page.scss'],
 })
-export class Tab1Page {
+export class HomePage   {
+
   user: User;
   club: any = [];
   restlistclub: any = [];
   listuserclub:Array<number> =[];
-  constructor(private userService: UserService,
-    private alertService: AlertService,
-    private navCtrl: NavController,
-    private router: Router,
-    private modalController: ModalController,
-    
-    ) {
 
-  }
+  constructor(
+    private userService: UserService,
+    private alertService: AlertService,
+    private router: Router,
+  ) { }
 
   ionViewWillEnter() {
     this.getRestListclub();
@@ -90,4 +84,5 @@ export class Tab1Page {
     this.router.navigate(['/club'],navigationExtras);
 
   }
+
 }

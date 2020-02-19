@@ -1,14 +1,6 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title *ngIf="nameClub != undefined" >{{nameClub}}</ion-title>
-    <ion-buttons slot="end">
-      <ion-icon style="font-size: 28px;" name="ribbon"></ion-icon>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
+<app-custom-header title="{{nameClub}}"
+icon_right="ribbon"
+icon_left="back" ></app-custom-header>
 
 <ion-content class="ion-padding">
   <h3>Booking</h3>
@@ -41,3 +33,4 @@
     <ion-button type="submit" fill="outline" size="small" color="primary">Booking</ion-button>
   </form>
 </ion-content>
+<app-custom-tabs></app-custom-tabs>

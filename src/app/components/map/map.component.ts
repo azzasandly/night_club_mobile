@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ViewChild, ElementRef, Input } from '@angular/core';
 import { Map, latLng, tileLayer, Layer, marker, icon } from 'leaflet';
 import { NavParams } from '@ionic/angular';
+declare var H: any;
 
 @Component({
   selector: 'app-map',
@@ -9,6 +10,8 @@ import { NavParams } from '@ionic/angular';
 })
 export class MapComponent  {
 
+
+ /* @ViewChild('map', {static: true}) mapElement: ElementRef;*/
   map: Map;
   latitude;
   longitude;

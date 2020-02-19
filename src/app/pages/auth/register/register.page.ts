@@ -142,8 +142,13 @@ export class RegisterPage implements OnInit {
               this.router.navigate(['/checklist']);
             }
             else {
+              let navigationExtras: NavigationExtras = {
+                queryParams: {
+                  changeColorHome: "primary"
+                  }
+              };
               //redirect to dashbord
-              this.router.navigate(['/dashboard']);
+              this.router.navigate(['/home'],navigationExtras);
             }
           }
         );

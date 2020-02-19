@@ -16,10 +16,15 @@ export class AppComponent {
 
   public appPages = [
     {
-      title: 'Dashboard',
-      url: '/dashboard',
+      title: 'Home',
+      url: '/home',
       icon: 'home'
     },
+    {
+    title: 'Profile',
+    url: '/profile',
+    icon: 'person'
+  },
 
 
 

@@ -47,6 +47,10 @@ const routes: Routes = [
     path: 'booking',
     loadChildren: './pages/booking/booking.module#BookingPageModule', canActivate: [AuthGuard]
   },
+  {
+    path: 'home',
+    loadChildren: './pages/home/home.module#HomePageModule', canActivate: [AuthGuard]
+  },
 
 
 ];

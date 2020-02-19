@@ -60,8 +60,13 @@ users = { id: '', name: '', email: '', picture: { data: { url: '' } } };
               this.router.navigate(['/checklist']);
             }
             else {
+              let navigationExtras: NavigationExtras = {
+                queryParams: {
+                  changeColorHome: "primary"
+                  }
+              };
               //redirect to dashbord
-              this.navCtrl.navigateRoot('/dashboard');
+              this.router.navigate(['/home'],navigationExtras);
             }
           }
         );
@@ -112,8 +117,13 @@ users = { id: '', name: '', email: '', picture: { data: { url: '' } } };
             this.router.navigate(['/checklist']);
           }
           else {
+            let navigationExtras: NavigationExtras = {
+              queryParams: {
+                changeColorHome: "primary"
+                }
+            };
             //redirect to dashbord
-            this.router.navigate(['/dashboard']);
+            this.router.navigate(['/home'],navigationExtras);
           }
         }
       );

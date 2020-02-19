@@ -20,7 +20,7 @@ export class ClubPage   {
   showMore:boolean =false;
   map: Map;
 
-  constructor(private menu: MenuController,
+  constructor(
     private clubService: ClubService,
     private route: ActivatedRoute,
     private router: Router,
@@ -28,7 +28,6 @@ export class ClubPage   {
     private navCtrl: NavController,
     public popoverCtrl: PopoverController
     ) { 
-      this.menu.enable(true);
 
     }
     ionViewWillEnter() {
@@ -68,29 +67,7 @@ export class ClubPage   {
     return await popover.present();  
     }
 
-  /*ionViewDidEnter() { this.leafletMap(); }
 
-  leafletMap() {
-
-
-    this.map = new Map('mapId').setView([36.924467, 10.285800], 13);
-
-    tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-
-      maxZoom: 18,
-      id: 'mapbox/streets-v11',
-      accessToken: 'pk.eyJ1IjoiYXp6YXNhbmRseSIsImEiOiJjazZrbWs1cXIwNWZsM2ZucGFybDF5Mzh3In0.DTkVYwlYB-77gCosSA1qwA'
-  }).addTo(this.map);
-
-    const markPoint = marker([36.924467, 10.285800]);
-    markPoint.bindPopup('<b>Hello world!</b><br>I am a popup.');
-    this.map.addLayer(markPoint);
-  }
-
-
-  ionViewWillLeave() {
-    this.map.remove();
-  }*/
 
 
   showClub(){
