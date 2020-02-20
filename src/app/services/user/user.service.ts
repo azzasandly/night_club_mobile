@@ -7,8 +7,6 @@ import { SecureStorage, SecureStorageObject } from '@ionic-native/secure-storage
 import { User } from '../../models/user';
 import { Club } from '../../models/club';
 import { Centerinterer } from '../../models/centerinterer';
-import { AuthService } from '../auth/auth.service';
-import { NavExtrasServiceService } from '../navigation/nav-extras-service.service';
 
 @Injectable({
   providedIn: 'root'
@@ -22,20 +20,12 @@ export class UserService {
     private storage: NativeStorage,
     private secureStorage: SecureStorage,
     private env: EnvService,
-    private authService: AuthService,
-    private navExtras: NavExtrasServiceService,
   ) { 
     
   }
 
   user() {
-    console.log('get token',this.navExtras.getTokenSer());
-    this.token = this.navExtras.getTokenSer();
-
-    const headers = new HttpHeaders({
-      'Authorization': this.token["token_type"]+" "+this.token["access_token"]
-    });
-    return this.http.get<User>(this.env.API_URL_USER + 'profile', { headers: headers })
+    return this.http.get<User>(this.env.API_URL_USER + 'profile')
     .pipe(
       tap(user => {
         return user;
@@ -43,11 +33,8 @@ export class UserService {
     )
   }
   club() {
-    this.token = this.navExtras.getTokenSer();
-    const headers = new HttpHeaders({
-      'Authorization': this.token["token_type"]+" "+this.token["access_token"]
-    });
-    return this.http.get<Club>(this.env.API_URL_USER + 'club', { headers: headers })
+
+    return this.http.get<Club>(this.env.API_URL_USER + 'club')
     .pipe(
       tap(club => {
         return club;
@@ -55,11 +42,8 @@ export class UserService {
     )
   }
   centerinterer() {
-    this.token = this.navExtras.getTokenSer();
-    const headers = new HttpHeaders({
-      'Authorization': this.token["token_type"]+" "+this.token["access_token"]
-    });
-    return this.http.get<Centerinterer>(this.env.API_URL_USER + 'centerinterest', { headers: headers })
+
+    return this.http.get<Centerinterer>(this.env.API_URL_USER + 'centerinterest')
     .pipe(
       tap(centerinterest => {
         return centerinterest;
@@ -67,38 +51,27 @@ export class UserService {
     )
   }
   addclub(idclubs:Array<number>) {
-    this.token = this.navExtras.getTokenSer();
-    console.log('idclubs service ',idclubs);
-    const headers = new HttpHeaders({
-      'Authorization': this.token["token_type"]+" "+this.token["access_token"]
-    });
+
     let postdata = JSON.stringify({
       idclubs
     });
     return this.http.post(this.env.API_URL_USER + 'userclub',
-      {idclub:postdata},{ headers: headers }
+      {idclub:postdata}
     )
   }
   addcenterinterer(idcenterinterest:Array<number>) {
-    this.token = this.navExtras.getTokenSer();
-    console.log('idcenterinterer service ',idcenterinterest);
-    const headers = new HttpHeaders({
-      'Authorization': this.token["token_type"]+" "+this.token["access_token"]
-    });
+
     let postdata = JSON.stringify({
       idcenterinterest
     });
     console.log('postdata service ',postdata);
     return this.http.post(this.env.API_URL_USER + 'userinterest',
-      {idcenterinterest:postdata},{ headers: headers }
+      {idcenterinterest:postdata}
     )
   }
   ListUserClub() {
-    this.token = this.navExtras.getTokenSer();
-    const headers = new HttpHeaders({
-      'Authorization': this.token["token_type"]+" "+this.token["access_token"]
-    });
-    return this.http.get<Club>(this.env.API_URL_USER + 'listclubuser', { headers: headers })
+
+    return this.http.get<Club>(this.env.API_URL_USER + 'listclubuser')
     .pipe(
       tap(club => {
         return club;
@@ -106,11 +79,8 @@ export class UserService {
     )
   }
   RestListUserClub() {
-    this.token = this.navExtras.getTokenSer();
-    const headers = new HttpHeaders({
-      'Authorization': this.token["token_type"]+" "+this.token["access_token"]
-    });
-    return this.http.get<Club>(this.env.API_URL_USER + 'restlistclubuser', { headers: headers })
+
+    return this.http.get<Club>(this.env.API_URL_USER + 'restlistclubuser')
     .pipe(
       tap(club => {
         return club;
@@ -118,12 +88,9 @@ export class UserService {
     )
   }
   UpdateProfile(fName: String, lName: String, tel: number ) {
-    this.token = this.navExtras.getTokenSer();
-    const headers = new HttpHeaders({
-      'Authorization': this.token["token_type"]+" "+this.token["access_token"]
-    });
+
     return this.http.post(this.env.API_URL_USER + 'updateprofile',
-      {fName: fName, lName: lName,tel: tel},{ headers: headers }
+      {fName: fName, lName: lName,tel: tel}
     )
   }
 }

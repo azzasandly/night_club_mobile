@@ -17,6 +17,7 @@ import { Tab1PageModule } from './pages/tab1/tab1.module';
 //import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MapComponent } from 'src/app/components/map/map.component';
+import { TokenInterceptor } from './interceptors/token.interceptor';
 
 
 @NgModule({
@@ -35,11 +36,11 @@ import { MapComponent } from 'src/app/components/map/map.component';
     SplashScreen,
     Facebook,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    /*{
+    {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
       multi: true
-    },*/
+    },
     NativeStorage,
     SecureStorage
   ],

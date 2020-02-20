@@ -26,12 +26,9 @@ export class EventService {
 
   //list events
   listEvent(id_club: number) {
-    this.token = this.navExtras.getTokenSer();
-    const headers = new HttpHeaders({
-      'Authorization': this.token["token_type"]+" "+this.token["access_token"]
-    });
+
     return this.http.post(this.env.API_URL_EVENT + 'listevent',
-    {idclub:id_club}, { headers: headers })
+    {idclub:id_club})
     .pipe(
       tap(event => {
         return event;
@@ -40,12 +37,9 @@ export class EventService {
   }
   //add interset events
   interestEvent(id_event: number,action_event: String) {
-    this.token = this.navExtras.getTokenSer();
-    const headers = new HttpHeaders({
-      'Authorization': this.token["token_type"]+" "+this.token["access_token"]
-    });
+
     return this.http.post(this.env.API_URL_EVENT + 'addinterestevent',
-    {idevent:id_event,action:action_event}, { headers: headers })
+    {idevent:id_event,action:action_event})
     .pipe(
       tap(event => {
         return event;

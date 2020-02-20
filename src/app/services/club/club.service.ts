@@ -24,12 +24,9 @@ export class ClubService {
 
   //details club
   showClub(id_club: number) {
-    this.token = this.navExtras.getTokenSer();
-    const headers = new HttpHeaders({
-      'Authorization': this.token["token_type"]+" "+this.token["access_token"]
-    });
+
     return this.http.post(this.env.API_URL_CLUB + 'show',
-    {idclub:id_club}, { headers: headers })
+    {idclub:id_club})
     .pipe(
       tap(club => {
         return club;

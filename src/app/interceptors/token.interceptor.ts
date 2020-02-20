@@ -13,19 +13,26 @@ import { Injectable } from '@angular/core';
 import { AlertService } from '../services/alert.service';
 import { ConvertActionBindingResult } from '@angular/compiler/src/compiler_util/expression_converter';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
+import { NavExtrasServiceService } from '../services/navigation/nav-extras-service.service';
     
   @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
       token: any;
     constructor(private router: Router,
         private storage: NativeStorage,
-        private alertService: AlertService,) {}
-    intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+        private alertService: AlertService,
+        private navExtras: NavExtrasServiceService,
+        ) {
 
-        const token = this.storage.getItem('token');
-        console.log('localstorege',token);
+        }
+    intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
       
-        if (token) {
+      this.token = this.navExtras.getTokenSer();
+      console.log('nav extra token ',this.token);
+        /*const token = this.storage.getItem('storage');
+        console.log('localstorege',token);*/
+      
+        if (this.token) {
           request = request.clone({
             setHeaders: {
               'Authorization': this.token["token_type"]+" "+this.token["access_token"]

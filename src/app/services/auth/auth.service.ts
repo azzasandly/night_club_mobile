@@ -24,6 +24,7 @@ export class AuthService {
     private alertService: AlertService,
     private navExtras: NavExtrasServiceService,
   ) {   }
+  
   login(email: String, password: String) {
     return this.http.post(this.env.API_URL_AUTH + 'login',
       {email: email, password: password}

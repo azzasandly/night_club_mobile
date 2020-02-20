@@ -32,10 +32,7 @@ export class BookingService {
     bookingForId: number,
     comment:string
     ) {
-    this.token = this.navExtras.getTokenSer();
-    const headers = new HttpHeaders({
-      'Authorization': this.token["token_type"]+" "+this.token["access_token"]
-    });
+
     return this.http.post(this.env.API_URL_BOOKING + 'addbooking',
     {idClub:idClub,
     nbParticipents:nbParticipents,
@@ -43,7 +40,7 @@ export class BookingService {
     bookingFor:bookingFor,
     bookingForId:bookingForId,
     comment:comment,
-    }, { headers: headers })
+    })
     .pipe(
       tap(booking => {
         return booking;
