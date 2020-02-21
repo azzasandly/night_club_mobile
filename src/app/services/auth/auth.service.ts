@@ -73,11 +73,24 @@ this.secureStorage.create('my_store_name')
     );
   }
 
-  register(fName: String, lName: String, tel: number, email: String, password: String) {
+  register(fName: String, lName: String, tel: String, email: String, password: String) {
     return this.http.post(this.env.API_URL_AUTH + 'register',
       {fName: fName, lName: lName,tel: tel, email: email, password: password}
     )
   }
+
+  sendSms(tel: String) {
+    return this.http.post(this.env.API_URL_AUTH + 'sendSms',
+      {tel: tel}
+    )
+  }
+  verifyPhone(code: number,fName: String, lName: String, tel: String, email: String, password: String) {
+    console.log('tel ',tel);
+    return this.http.post(this.env.API_URL_AUTH + 'verifyPhone',
+    {code: code, fName: fName, lName: lName,tel: tel, email: email, password: password}
+    )
+  }
+
   logout() {
 
     const headers = new HttpHeaders({

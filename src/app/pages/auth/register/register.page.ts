@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController, NavController } from '@ionic/angular';
+import { ModalController, NavController, AlertController } from '@ionic/angular';
 import { LoginPage } from '../login/login.page';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { NgForm} from '@angular/forms';
@@ -10,6 +10,7 @@ import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms'
 import { PhoneValidator } from '../../../validators/phone.validator';
 import { PasswordValidator } from '../../../validators/password.validator';
 import { CountryPhone } from '../../profile/country-phone.model';
+
 
 @Component({
   selector: 'app-register',
@@ -24,12 +25,16 @@ export class RegisterPage implements OnInit {
 
   countries: Array<any>;
   genders: Array<string>;
+  postDataregister:any;
+  phone_number:string;
+
 
   constructor(private modalController: ModalController,
     private authService: AuthService,
     private userService: UserService,
     private navCtrl: NavController,
     private router: Router,
+    public alertController: AlertController,
     private alertService: AlertService,
     public formBuilder: FormBuilder,
   ) { }
@@ -119,52 +124,145 @@ export class RegisterPage implements OnInit {
     });
     return await loginModal.present();
   }
+
   register(values) {
+  
     console.log(values);
-    this.authService.register(values.name, values.lastname, values.country_phone.phone, values.email, values.matching_passwords.password).subscribe(
+    let code_country =values.country_phone.country.code;
+    let phone = values.country_phone.phone;
+    this.phone_number = code_country + phone;
+    console.log("phone_number ",this.phone_number);
+
+    //send code
+    this.authService.sendSms(this.phone_number).subscribe(
       data => {
-        this.authService.login(values.email, values.matching_passwords.password).subscribe(
-          data => {
-            console.log('data login ',data);
-            this.alertService.presentToast("Logged In");
-          },
-          error => {
-            console.log(error);
-            this.alertService.presentToast(error.error.message);
-          },
-          () => {            
-        //test user 
-        this.userService.user().subscribe(
-          user => {
-            //if userclub or userinterer null
-            if( ((user.user_club_id == null) || (user.user_center_interest_id == null)) || ((user.user_club_id == null) && (user.user_center_interest_id == null)) ) {
-              //redirect to page check list club & ineterer
-              this.router.navigate(['/checklist']);
-            }
-            else {
-              let navigationExtras: NavigationExtras = {
-                queryParams: {
-                  changeColorHome: "primary"
-                  }
-              };
-              //redirect to dashbord
-              this.router.navigate(['/home'],navigationExtras);
-            }
-          }
-        );
-          }
-        );
-        //success create user
-        this.alertService.presentToast(data['message']);
+
+
+      this.alertService.presentToast(data['message']);
+        
       },
       error => {
+
         console.log(error);
         this.alertService.presentToast(error.error.message);
       },
-      () => {
+      () => { 
+      // show alert prompt to use code received
+
+      this.presentAlertCode(values.name,
+        values.lastname,
+        this.phone_number,
+        values.email,
+        values.matching_passwords.password
+        );
         
-      }
-    );
-    
+      }  
+
+      );
+
   }
+
+
+
+  async presentAlertCode(name,
+    lastname,
+    phone_number,
+    email,
+    password)
+     {
+    const alertCode = await this.alertController.create({
+      header: 'Verification code',
+      inputs: [
+        {
+          name: 'code',
+          placeholder: 'Enter the code received in your phone',
+          type: 'number'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel');
+          }
+        }, {
+          text: 'Ok',
+          handler: data => {
+            if (data.code) {
+            console.log('Code',data.code);
+            console.log('phone_number ',phone_number);
+            //verification code
+            this.authService.verifyPhone(data.code,
+              name,
+              lastname,
+              phone_number,
+              email,
+              password
+            ).subscribe(
+              data => {
+        
+        
+              this.alertService.presentToast(data['message']);
+                
+              },
+              error => {
+        
+                console.log(error);
+                this.alertService.presentToast(error.error.message);
+              },
+              () => { 
+                //login
+
+                this.authService.login(email, password).subscribe(
+                  data => {
+                    console.log('data login ',data);
+                    this.alertService.presentToast("Logged In");
+                  },
+                  error => {
+                    console.log(error);
+                    this.alertService.presentToast(error.error.message);
+                  },
+                  () => {    
+                            
+                //test user 
+                this.userService.user().subscribe(
+                  user => {
+                    //if userclub or userinterer null
+                    if( ((user.user_club_id == null) || (user.user_center_interest_id == null)) || ((user.user_club_id == null) && (user.user_center_interest_id == null)) ) {
+                      //redirect to page check list club & ineterer
+                      this.router.navigate(['/checklist']);
+                    }
+                    else {
+                      let navigationExtras: NavigationExtras = {
+                        queryParams: {
+                          changeColorHome: "primary"
+                          }
+                      };
+                      //redirect to dashbord
+                      this.router.navigate(['/home'],navigationExtras);
+                    }
+                  }
+                );
+                  }
+                );
+
+              }  
+        
+        
+              );
+
+            }
+            //input empty
+            else{
+              this.alertService.presentToast('Input code is empty');
+            }
+
+          }
+        }
+      ]
+    });
+   await alertCode.present(); 
+}
 }
