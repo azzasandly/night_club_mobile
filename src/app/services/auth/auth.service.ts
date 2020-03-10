@@ -9,6 +9,9 @@ import { Club } from '../../models/club';
 import { Centerinterer } from '../../models/centerinterer';
 import { AlertService } from '../alert.service';
 import { NavExtrasServiceService } from '../navigation/nav-extras-service.service';
+import { Storage } from '@ionic/storage';
+import { Router, NavigationExtras } from '@angular/router';
+import { UserService } from '../user/user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,10 +21,12 @@ export class AuthService {
   token:any;
   constructor(
     private http: HttpClient,
-    private storage: NativeStorage,
+    private storage: Storage,
     private secureStorage: SecureStorage,
     private env: EnvService,
     private alertService: AlertService,
+    private router: Router,
+    private userService: UserService,
     private navExtras: NavExtrasServiceService,
   ) {   }
   
@@ -33,7 +38,7 @@ export class AuthService {
         this.navExtras.setTokenSer(token);
         console.log('token in auth ',token);
         // save token in storage
-        this.storage.setItem('storage', token)
+        this.storage.set('tt', token)
         .then(
           () => {
             console.log('Token Stored',token);
@@ -93,15 +98,13 @@ this.secureStorage.create('my_store_name')
 
   logout() {
 
-    const headers = new HttpHeaders({
-      'Authorization': this.token["token_type"]+" "+this.token["access_token"]
-    });
-    return this.http.get(this.env.API_URL_AUTH + 'logout', { headers: headers })
+    return this.http.get(this.env.API_URL_AUTH + 'logout')
     .pipe(
       tap(data => {
-        this.storage.remove("storage");
+        this.storage.remove("tt");
         this.isLoggedIn = false;
         delete this.token;
+
         return data;
       })
     )
@@ -109,13 +112,41 @@ this.secureStorage.create('my_store_name')
 
   getToken() {
     //change get from storage
-    //this.storage.getItem('storage')
-    return this.token = this.navExtras.getTokenSer().then(
+    //this.storage.get('storage')  this.navExtras.getTokenSer()
+    return this.token = this.storage.get('tt').then(
       data => {
-        console.log('get token from serv',data);
+        console.log('get token from storage',data);
         this.token = data;
       if(this.token != null) {
+        //save token in sevice navigation
+        this.navExtras.setTokenSer(this.token);
+
           this.isLoggedIn=true;
+
+        //test user 
+        this.userService.user().subscribe(
+          user => {
+            console.log('uc ',user.user_club_id);
+            console.log('ui ',user.user_center_interest_id);
+            //if userclub or userinterer null
+            if( ((user.user_club_id == null) || (user.user_center_interest_id == null)) || ((user.user_club_id == null) && (user.user_center_interest_id == null)) ) {
+              //redirect to page check list club & ineterer
+    
+              this.router.navigate(['/checklist']);
+            }
+            else {
+              let navigationExtras: NavigationExtras = {
+                queryParams: {
+                  changeColorHome: "primary"
+                  }
+              };
+              //redirect to dashbord
+              this.router.navigate(['/home'],navigationExtras);
+            }
+          }
+        );
+
+
         } else {
           this.isLoggedIn=false;
         }

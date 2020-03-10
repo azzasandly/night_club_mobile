@@ -76,7 +76,7 @@ export class BookingPage  {
     data => {
       this.alertService.presentToast(data['message']);
       //redirect to page home
-    this.router.navigate(['/dashboard']);
+    this.router.navigate(['/home']);
     },
     error => {
       console.log(error);

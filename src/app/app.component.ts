@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 
-import { Platform, NavController } from '@ionic/angular';
+import { Platform, NavController, MenuController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AuthService } from './services/auth/auth.service';
 import { AlertService } from './services/alert.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -36,9 +37,12 @@ export class AppComponent {
     private statusBar: StatusBar,
     private authService: AuthService,
     private navCtrl: NavController,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private menu: MenuController,
+    private router: Router,
   ) {
     this.initializeApp();
+    this.menu.enable(false);
   }
 
 
@@ -56,13 +60,15 @@ export class AppComponent {
     logout() {
       this.authService.logout().subscribe(
         data => {
-          this.alertService.presentToast(data['message']);        
+          this.alertService.presentToast(data['message']);   
+          this.router.navigate(['/login']);   
+          this.menu.enable(false);  
         },
         error => {
           console.log(error);
         },
         () => {
-          this.navCtrl.navigateRoot('/login');
+
         }
       );
       }  

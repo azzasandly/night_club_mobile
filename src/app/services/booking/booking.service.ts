@@ -4,7 +4,6 @@ import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { SecureStorage } from '@ionic-native/secure-storage/ngx';
 import { EnvService } from '../env.service';
 import { AuthService } from '../auth/auth.service';
-import { Club } from '../../models/club';
 import { tap } from 'rxjs/operators';
 import { NavExtrasServiceService } from '../navigation/nav-extras-service.service';
 

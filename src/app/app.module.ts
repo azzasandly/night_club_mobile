@@ -17,7 +17,8 @@ import { Tab1PageModule } from './pages/tab1/tab1.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MapComponent } from 'src/app/components/map/map.component';
 import { TokenInterceptor } from './interceptors/token.interceptor';
-
+import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner/ngx';
+import { IonicStorageModule } from '@ionic/storage';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { TokenInterceptor } from './interceptors/token.interceptor';
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
+    IonicStorageModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,
     Tab1PageModule,
@@ -42,6 +44,7 @@ import { TokenInterceptor } from './interceptors/token.interceptor';
       multi: true
     },
     NativeStorage,
+    QRScanner,
     SecureStorage
   ],
   bootstrap: [AppComponent]

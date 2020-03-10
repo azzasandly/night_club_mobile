@@ -40,8 +40,19 @@ export class CustomTabsComponent   {
       changeColorHome: "primary"
       }
   };
-  //navigate to page profile
+  //navigate to page home
   this.router.navigate(['/home'],navigationExtras);
+}
+
+qrcode(){
+
+  let navigationExtras: NavigationExtras = {
+    queryParams: {
+      changecolorCheck: "primary"
+      }
+  };
+  //navigate to page qrcode
+  this.router.navigate(['/qrcode'],navigationExtras);
 }
 
 }

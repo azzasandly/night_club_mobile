@@ -13,7 +13,7 @@
           <ion-label *ngIf="colorActuality != undefined" color="{{colorActuality}}">Actuality</ion-label>
         </ion-tab-button>
     
-        <ion-tab-button >
+        <ion-tab-button (click)='qrcode()' >
           <ion-icon name="qr-scanner" *ngIf="colorCheck != undefined" color="{{colorCheck}}"></ion-icon>
           <ion-label *ngIf="colorCheck != undefined" color="{{colorCheck}}">Check In</ion-label>
         </ion-tab-button>

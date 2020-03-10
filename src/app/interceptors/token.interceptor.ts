@@ -14,12 +14,13 @@ import { AlertService } from '../services/alert.service';
 import { ConvertActionBindingResult } from '@angular/compiler/src/compiler_util/expression_converter';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { NavExtrasServiceService } from '../services/navigation/nav-extras-service.service';
-    
+import { Storage } from '@ionic/storage';
+
   @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
-      token: any;
+      //token: any;
     constructor(private router: Router,
-        private storage: NativeStorage,
+        private storage: Storage,
         private alertService: AlertService,
         private navExtras: NavExtrasServiceService,
         ) {
@@ -27,15 +28,16 @@ export class TokenInterceptor implements HttpInterceptor {
         }
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
       
-      this.token = this.navExtras.getTokenSer();
-      console.log('nav extra token ',this.token);
-        /*const token = this.storage.getItem('storage');
-        console.log('localstorege',token);*/
+      /*this.token = this.storage.get('storage');
+      console.log('storage extra token ',this.token);*/
+        /* this.token = this.storage.getItem('storage');*/
+        const token = this.navExtras.getTokenSer();
+        console.log('token get in inter ',token);
       
-        if (this.token) {
+        if (token != undefined) {
           request = request.clone({
             setHeaders: {
-              'Authorization': this.token["token_type"]+" "+this.token["access_token"]
+              'Authorization': token["token_type"]+" "+token["access_token"]
             }
           });
         }

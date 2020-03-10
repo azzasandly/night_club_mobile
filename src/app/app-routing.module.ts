@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './guard/auth.guard';
+import { SlideGuard } from './guard/slide.guard';
 
 const routes: Routes = [
   {
@@ -10,11 +11,11 @@ const routes: Routes = [
   },
 
   { path: 'login',
-   loadChildren: './pages/auth/login/login.module#LoginPageModule'
+   loadChildren: './pages/auth/login/login.module#LoginPageModule',canActivate: [SlideGuard]
   },
   
    { path: 'register',
-   loadChildren: './pages/auth/register/register.module#RegisterPageModule'
+   loadChildren: './pages/auth/register/register.module#RegisterPageModule',canActivate: [SlideGuard]
   },
   
   { path: 'dashboard',
@@ -50,6 +51,14 @@ const routes: Routes = [
   {
     path: 'home',
     loadChildren: './pages/home/home.module#HomePageModule', canActivate: [AuthGuard]
+  },
+  {
+    path: 'qrcode',
+    loadChildren: './pages/qrcode/qrcode.module#QrcodePageModule',canActivate: [AuthGuard] 
+  },
+  {
+    path: 'slides',
+    loadChildren: () => import('./pages/slides/slides.module').then( m => m.SlidesPageModule)
   },
 
 

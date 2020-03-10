@@ -43,6 +43,7 @@ export class HomePage   {
       }
     );
   }
+  
   addClub(event: any){
     console.log('list user clubs',this.club);
     //get old list user club

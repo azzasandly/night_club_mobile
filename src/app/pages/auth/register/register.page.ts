@@ -118,11 +118,8 @@ export class RegisterPage implements OnInit {
   };
 
   // On Login button tap, dismiss Register modal and open login Modal
-  async loginModal() {
-    const loginModal = await this.modalController.create({
-      component: LoginPage,
-    });
-    return await loginModal.present();
+   loginModal() {
+    this.router.navigate(['/login']);
   }
 
   register(values) {
@@ -136,7 +133,6 @@ export class RegisterPage implements OnInit {
     //send code
     this.authService.sendSms(this.phone_number).subscribe(
       data => {
-
 
       this.alertService.presentToast(data['message']);
         
@@ -203,7 +199,6 @@ export class RegisterPage implements OnInit {
             ).subscribe(
               data => {
         
-        
               this.alertService.presentToast(data['message']);
                 
               },
@@ -214,43 +209,8 @@ export class RegisterPage implements OnInit {
               },
               () => { 
                 //login
-
-                this.authService.login(email, password).subscribe(
-                  data => {
-                    console.log('data login ',data);
-                    this.alertService.presentToast("Logged In");
-                  },
-                  error => {
-                    console.log(error);
-                    this.alertService.presentToast(error.error.message);
-                  },
-                  () => {    
-                            
-                //test user 
-                this.userService.user().subscribe(
-                  user => {
-                    //if userclub or userinterer null
-                    if( ((user.user_club_id == null) || (user.user_center_interest_id == null)) || ((user.user_club_id == null) && (user.user_center_interest_id == null)) ) {
-                      //redirect to page check list club & ineterer
-                      this.router.navigate(['/checklist']);
-                    }
-                    else {
-                      let navigationExtras: NavigationExtras = {
-                        queryParams: {
-                          changeColorHome: "primary"
-                          }
-                      };
-                      //redirect to dashbord
-                      this.router.navigate(['/home'],navigationExtras);
-                    }
-                  }
-                );
-                  }
-                );
-
+                this.login(email,password);
               }  
-        
-        
               );
 
             }
@@ -264,5 +224,44 @@ export class RegisterPage implements OnInit {
       ]
     });
    await alertCode.present(); 
+}
+
+
+//function login
+login(email,password){
+
+  this.authService.login(email, password).subscribe(
+    data => {
+      console.log('data login ',data);
+      this.alertService.presentToast("Logged In");
+    },
+    error => {
+      console.log(error);
+      this.alertService.presentToast(error.error.message);
+    },
+    () => {    
+
+  //test user 
+  this.userService.user().subscribe(
+    user => {
+      //if userclub or userinterer null
+      if( ((user.user_club_id == null) || (user.user_center_interest_id == null)) || ((user.user_club_id == null) && (user.user_center_interest_id == null)) ) {
+        //redirect to page check list club & ineterer
+        this.router.navigate(['/checklist']);
+      }
+      else {
+        let navigationExtras: NavigationExtras = {
+          queryParams: {
+            changeColorHome: "primary"
+            }
+        };
+        //redirect to dashbord
+        this.router.navigate(['/home'],navigationExtras);
+      }
+    }
+  );
+    }
+  );
+
 }
 }

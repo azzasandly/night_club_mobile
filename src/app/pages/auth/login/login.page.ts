@@ -8,7 +8,7 @@ import { AlertService } from 'src/app/services/alert.service';
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook/ngx';
 import { Router,NavigationExtras } from '@angular/router';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
-
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-login',
@@ -25,13 +25,13 @@ users = { id: '', name: '', email: '', picture: { data: { url: '' } } };
     private userService: UserService,
     private navCtrl: NavController,
     private router: Router,
-    private storage: NativeStorage,
+    private storage: Storage,
     private alertService: AlertService,
     private menu: MenuController,
     private fb: Facebook
   ) {
     this.menu.enable(false);
-    fb.getLoginStatus()
+    /*fb.getLoginStatus()
     .then(res => {
       console.log(res.status);
       if (res.status === 'connect') {
@@ -40,12 +40,13 @@ users = { id: '', name: '', email: '', picture: { data: { url: '' } } };
         this.isLoggedIn = false;
       }
     })
-    .catch(e => console.log(e));
+    .catch(e => console.log(e));*/
+
 
    }
 
    checkToken() {
-    this.storage.getItem('storage').then(token => {
+    this.storage.get('storage').then(token => {
       console.log('check token ',token);
       if (token) {
         //test user 
@@ -78,12 +79,10 @@ users = { id: '', name: '', email: '', picture: { data: { url: '' } } };
   }
 
   // On Register button tap, dismiss login modal and open register modal
-  async registerModal() {
-    const registerModal = await this.modalController.create({
-      component: RegisterPage
-    });
-    return await registerModal.present();
+   registerModal() {
+    this.router.navigate(['/register']);
   }
+
   login(form: NgForm) {
     if (form.value.email == "")
     {

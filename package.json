@@ -24,17 +24,21 @@
     "@ionic-native/core": "^5.19.1",
     "@ionic-native/facebook": "^5.19.1",
     "@ionic-native/native-storage": "^5.19.1",
+    "@ionic-native/qr-scanner": "^5.22.0",
     "@ionic-native/secure-storage": "^5.19.1",
     "@ionic-native/sms": "^5.21.5",
     "@ionic-native/splash-screen": "^5.19.1",
     "@ionic-native/status-bar": "^5.19.1",
     "@ionic/angular": "^4.11.7",
+    "@ionic/storage": "^2.2.0",
     "cordova-android": "8.1.0",
     "cordova-plugin-actionsheet": "2.3.3",
     "cordova-plugin-facebook4": "6.2.0",
     "cordova-plugin-nativestorage": "2.3.2",
+    "cordova-plugin-qrscanner": "3.0.1",
     "cordova-plugin-secure-storage": "3.0.2",
     "cordova-sms-plugin": "1.0.0",
+    "cordova-sqlite-storage": "4.0.0",
     "core-js": "^3.6.3",
     "google-libphonenumber": "^3.2.6",
     "leaflet": "^1.6.0",
@@ -95,7 +99,9 @@
       },
       "cordova-plugin-ionic-keyboard": {},
       "cordova-plugin-actionsheet": {},
-      "cordova-sms-plugin": {}
+      "cordova-sms-plugin": {},
+      "cordova-plugin-qrscanner": {},
+      "cordova-sqlite-storage": {}
     },
     "platforms": [
       "android"
