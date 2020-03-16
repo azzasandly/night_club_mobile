@@ -14,7 +14,7 @@ import { AlertService } from 'src/app/services/alert.service';
 export class QrcodePage  {
 
   scanSubscription;
-
+  qrScan:any;
 
   constructor(private qrScanner: QRScanner,
     private router: Router,
@@ -35,22 +35,60 @@ export class QrcodePage  {
           }
         });
       });*/
+     this.Platform.backButton.subscribeWithPriority(0,()=>{
+        document.getElementsByTagName("body")[0].style.opacity = "1";
+        this.qrScan.unsubscribe();
+      });
 
 
      }
      ionViewDidEnter() {
-      //this.scanCode();
+
        
    }
      ionViewDidLoad(){          
         //this.qrscanner();
      }
      ionViewWillEnter() {
+
     }
     ionViewWillLeave() {
     }
 
+statScanning(){
+  // Optionally request the permission early
+this.qrScanner.prepare()
+.then((status: QRScannerStatus) => {
+   if (status.authorized) {
+    this.qrScanner.show();
 
+     document.getElementsByTagName("body")[0].style.opacity = '0.2';
+
+    this.qrScan = this.qrScanner.scan().subscribe((text: string) => {
+      document.getElementsByTagName("body")[0].style.opacity = "1";
+
+      this.qrScan.unsubscribe(); // stop scanning
+      console.log('Scanned something', text);
+      this.alertService.presentToast(text);
+
+    },(err)=>{
+      console.log(JSON.stringify(err));
+    });
+
+   } else if (status.denied === true) {
+     // camera permission was permanently denied
+     // you must use QRScanner.openSettings() method to guide the user to the settings page
+     // then they can grant the permission from there
+
+     console.log('denied true');
+   } else if (status.authorized === false){
+     // permission was denied, but not permanently. You can ask for permission again at a later time.
+     console.log('authorized false');
+    }
+})
+.catch((e: any) => console.log('Error is', e));
+
+}
 
     qrscanner() {
 

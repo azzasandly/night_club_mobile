@@ -4,14 +4,15 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content style="background: none transparent;">
-<div class="message">
-    <div class="text">
-      Scan your QRcode
-    </div>
-  </div>
-  <img src="../../../assets/camscan.png" style="display:block;width:100%;height:100%;margin-left:auto;margin-right:auto;" />
+<ion-content class="ion-padding" style="text-align:center">
 
-</ion-content>
+  <ion-button 
+  fill="outline" size="small" 
+  color="secondary" (click)='statScanning()'>
+
+  Start Scan
+  </ion-button>
+
+</ion-content >
 
 <app-custom-tabs></app-custom-tabs>
