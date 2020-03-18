@@ -19,6 +19,7 @@ import { MapComponent } from 'src/app/components/map/map.component';
 import { TokenInterceptor } from './interceptors/token.interceptor';
 import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner/ngx';
 import { IonicStorageModule } from '@ionic/storage';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import { IonicStorageModule } from '@ionic/storage';
     StatusBar,
     SplashScreen,
     Facebook,
+    Geolocation,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     {
       provide: HTTP_INTERCEPTORS,

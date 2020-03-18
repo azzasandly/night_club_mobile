@@ -23,6 +23,7 @@
     "@ionic-native/action-sheet": "^5.20.0",
     "@ionic-native/core": "^5.19.1",
     "@ionic-native/facebook": "^5.19.1",
+    "@ionic-native/geolocation": "^5.22.0",
     "@ionic-native/native-storage": "^5.19.1",
     "@ionic-native/qr-scanner": "^5.22.0",
     "@ionic-native/secure-storage": "^5.19.1",
@@ -34,6 +35,7 @@
     "cordova-android": "8.1.0",
     "cordova-plugin-actionsheet": "2.3.3",
     "cordova-plugin-facebook4": "6.2.0",
+    "cordova-plugin-geolocation": "4.0.2",
     "cordova-plugin-nativestorage": "2.3.2",
     "cordova-plugin-qrscanner": "3.0.1",
     "cordova-plugin-secure-storage": "3.0.2",
@@ -101,7 +103,8 @@
       "cordova-plugin-actionsheet": {},
       "cordova-sms-plugin": {},
       "cordova-plugin-qrscanner": {},
-      "cordova-sqlite-storage": {}
+      "cordova-sqlite-storage": {},
+      "cordova-plugin-geolocation": {}
     },
     "platforms": [
       "android"

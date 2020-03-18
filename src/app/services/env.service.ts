@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class EnvService {
-  API_URL = 'http://192.168.1.2/nightclubsapi/public/api/';
+  API_URL = 'http://192.168.43.84:8100/api/';
   API_URL_AUTH = this.API_URL +'auth/';
   API_URL_CLUB = this.API_URL +'club/';
   API_URL_EVENT = this.API_URL +'event/';
