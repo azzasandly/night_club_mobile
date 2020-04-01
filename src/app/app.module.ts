@@ -12,7 +12,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS }    from '@angular/common/http';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { Facebook } from '@ionic-native/facebook/ngx';
 import { SecureStorage } from '@ionic-native/secure-storage/ngx';
-import { Tab1PageModule } from './pages/tab1/tab1.module';
+
 //import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MapComponent } from 'src/app/components/map/map.component';
@@ -31,7 +31,6 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
     IonicStorageModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,
-    Tab1PageModule,
     ReactiveFormsModule,
   ],
   providers: [

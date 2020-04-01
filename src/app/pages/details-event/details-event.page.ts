@@ -15,6 +15,7 @@ export class DetailsEventPage  {
 
   listDetailEvent : any ;
   dataEvent : any ;
+  dayEvent:any;
   name_club: String;
   id_club: number;
   actionSheet:any;
@@ -39,6 +40,7 @@ detailEvent(){
         this.route.queryParams.subscribe((res)=>{
           this.name_club = res['name'];
           this.id_club = res['idClub'];
+          this.dayEvent = res['dayEvent'];
       });
       this.listDetailEvent = this.navExtras.getExtras();
       console.log("list ",this.listDetailEvent);
@@ -114,15 +116,13 @@ presentActionSheet(id_event: number){
 }
 refreshevent(){
     //get list event
-    this.eventService.listEvent(this.id_club).subscribe(
+    this.eventService.getEvent(this.id_club).subscribe(
       data => {
         console.log('other data event ',data);
-        this.dataEvent = data;
-        for (var i = 0; i < this.dataEvent.length; i++) {
-          if (this.dataEvent[i].event.id == this.event_id){
-            this.listDetailEvent = this.dataEvent[i];
-          }
-        }
+        console.log('dayEvent in details ',this.dayEvent);
+        this.dataEvent = data[this.dayEvent];
+        this.listDetailEvent = this.dataEvent[0];
+        console.log('new listDetailEvent ',this.listDetailEvent);
       },
       error => {
         console.log(error);

@@ -14,12 +14,9 @@ import { NavController } from '@ionic/angular';
 export class ChecklistPage  {
 
   club: Club;
-  centerinterer: Centerinterer;
   data: any;
   listclub:Array<number> =[];
-  listcenterinterer:Array<number> =[];
-  showcenter:boolean=true;
-  idcenter: number;
+
   idclub: number;
   constructor(private userService: UserService,
     private route: ActivatedRoute,
@@ -29,7 +26,6 @@ export class ChecklistPage  {
   }
   ionViewWillEnter() {
     this.getListclub();
-    this.getListcenterinterer();
 
 
   }
@@ -47,61 +43,25 @@ export class ChecklistPage  {
     console.log('listclub',this.listclub);
 
   } 
-  addcenterinterer(event:any) {
-    this.idcenter = parseInt(event.target.value);
-    if (event.target.checked == true){
-      this.listcenterinterer.push(this.idcenter);
-    }
-    else if(event.target.checked == false){
-      console.log('her');
-      const index: number = this.listcenterinterer.indexOf(this.idcenter);
-      if (index !== -1) {
-          this.listcenterinterer.splice(index, 1);
-      }
-    }
-    console.log('listcenter',this.listcenterinterer);
 
-  } 
-  continue(){
-   
-    if (this.listcenterinterer.length == 0){
-      this.alertService.presentToast('Choose your area of interst');
-    }
-
-    else{
-      this.showcenter=false;
-    }
-
-  }
   validate(){
      if (this.listclub.length == 0){
       this.alertService.presentToast('Choose your Club');
     }
     else{
       
-    console.log('val listcenter',this.listcenterinterer);
     console.log(' val listclub',this.listclub);
-    this.userService.addcenterinterer(this.listcenterinterer).subscribe(
+    this.userService.addclub(this.listclub).subscribe(
       data => {
-        this.userService.addclub(this.listclub).subscribe(
-          data => {
-          },
-          error => {
-            console.log(error);
-          },
-          () => {
-            this.navCtrl.navigateRoot('/dashboard');
-          }
-        );
-        this.alertService.presentToast(data['message']);
       },
       error => {
         console.log(error);
       },
       () => {
-        
+        this.navCtrl.navigateRoot('/home');
       }
     );
+
     }
   }
  
@@ -114,14 +74,6 @@ export class ChecklistPage  {
     }
   );
 }
-  getListcenterinterer(){
-  this.userService.centerinterer().subscribe(
-    centerinterest => {
-      console.log('center intere',centerinterest);
-      this.centerinterer = centerinterest;
 
-    }
-  );
-}
 
 }

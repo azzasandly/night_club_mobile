@@ -52,10 +52,9 @@ users = { id: '', name: '', email: '', picture: { data: { url: '' } } };
         //test user 
         this.userService.user().subscribe(
           user => {
-            console.log('uc ',user.user_club_id);
-            console.log('ui ',user.user_center_interest_id);
+            console.log('func checktoken user clubs ',user.user_club_id);
             //if userclub or userinterer null
-            if( ((user.user_club_id == null) || (user.user_center_interest_id == null)) || ((user.user_club_id == null) && (user.user_center_interest_id == null)) ) {
+            if( user.user_club_id == null) {
               //redirect to page check list club & ineterer
     
               this.router.navigate(['/checklist']);
@@ -108,11 +107,10 @@ users = { id: '', name: '', email: '', picture: { data: { url: '' } } };
       this.userService.user().subscribe(
         user => {
           console.log(' user test ',user);
-          //if userclub or userinterer null
-          if( ((user.user_club_id == null) || (user.user_center_interest_id == null)) || ((user.user_club_id == null) && (user.user_center_interest_id == null)) ) {
-            //redirect to page check list club & ineterer
+          //if userclub null
+          if( user.user_club_id == null ) {
+            //redirect to page check list club
             console.log('user_club_id ',user.user_club_id);
-            console.log('user_center_interest_id ',user.user_center_interest_id);
             this.router.navigate(['/checklist']);
           }
           else {
@@ -121,7 +119,7 @@ users = { id: '', name: '', email: '', picture: { data: { url: '' } } };
                 changeColorHome: "primary"
                 }
             };
-            //redirect to dashbord
+            //redirect to home
             this.router.navigate(['/home'],navigationExtras);
           }
         }

@@ -1,27 +1,27 @@
 <ion-card >
-  <img src="{{listDetailEvent.event.image}}" width="150" height="130"/>
+  <img src="{{listDetailEvent.image}}" width="150" height="130"/>
   <ion-card-header>
     <ion-card-title>
       <ion-row>
         <ion-col center text-center>
         <!--button intersted-->
-        <ion-button *ngIf="listDetailEvent.user_action === 'interested'" fill="solid" size="small"  color="primary" (click)='presentActionSheet(listDetailEvent.event.id)'>
+        <ion-button *ngIf="listDetailEvent.user && listDetailEvent.user.action === 'interested'" fill="solid" size="small"  color="primary" (click)='presentActionSheet(listDetailEvent.id)'>
           <ion-icon  name="star"></ion-icon>
-          <div >{{listDetailEvent.user_action}}</div>
+          <div >{{listDetailEvent.user.action}}</div>
 
         </ion-button>
         <!--button going-->
-        <ion-button *ngIf="listDetailEvent.user_action === 'going'" fill="solid" size="small"  color="primary" (click)='presentActionSheet(listDetailEvent.event.id)'>
+        <ion-button *ngIf="listDetailEvent.user && listDetailEvent.user.action === 'going'" fill="solid" size="small"  color="primary" (click)='presentActionSheet(listDetailEvent.id)'>
           <ion-icon  name="checkmark-circle"></ion-icon>
-          <div>{{listDetailEvent.user_action}}</div>
+          <div>{{listDetailEvent.user.action}}</div>
         </ion-button>
         <!--button not going-->
-        <ion-button *ngIf="listDetailEvent.user_action === 'not_going'" fill="solid" size="small"  color="primary" (click)='presentActionSheet(listDetailEvent.event.id)'>
+        <ion-button *ngIf="listDetailEvent.user && listDetailEvent.user.action === 'not_going'" fill="solid" size="small"  color="primary" (click)='presentActionSheet(listDetailEvent.id)'>
           <ion-icon name="close"></ion-icon>
           <div>Not Going</div>
           </ion-button>
         <!--button default-->
-        <ion-button *ngIf="!listDetailEvent.user_action" fill="outline" size="small"  color="secondary" (click)='presentActionSheet(listDetailEvent.event.id)'>
+        <ion-button *ngIf="!listDetailEvent.user" fill="outline" size="small"  color="secondary" (click)='presentActionSheet(listDetailEvent.id)'>
           <ion-icon name="star"></ion-icon>
           <div> Interest Now</div>
         </ion-button>
@@ -29,11 +29,11 @@
         <!--button book-->
         <ion-col center 
         class="ion-text-center">
-        <div *ngIf="listDetailEvent.event.avaible_for_booking && listDetailEvent.total_person_booking < listDetailEvent.event.max_number_for_booking && !listDetailEvent.user_booked; then avaible else notavaible"></div>
+        <div *ngIf="listDetailEvent.avaible_for_booking && listDetailEvent.booking_count < listDetailEvent.max_number_for_booking && !listDetailEvent.userbooking; then avaible else notavaible"></div>
 
       <ng-template #avaible>
          <ion-button
-         fill="outline" size="small"  color="secondary" (click)='booking(listDetailEvent.event.id,listDetailEvent.event.club_id,listDetailEvent.event.started_date)'>
+         fill="outline" size="small"  color="secondary" (click)='booking(listDetailEvent.id,listDetailEvent.club_id,listDetailEvent.started_date)'>
            <ion-icon name="text"></ion-icon>
            <div>Book Now</div>
          </ion-button>
@@ -52,7 +52,7 @@
       </ion-row>
       <ion-row>
         <ion-col >
-        {{listDetailEvent.event.title}}
+        {{listDetailEvent.title}}
         </ion-col >
         </ion-row>
     </ion-card-title>
@@ -62,8 +62,8 @@
         <ion-label>
           <ion-icon name="time" slot="start"></ion-icon>
 
-          {{listDetailEvent.event.started_date?.substr(0,10)}} at {{listDetailEvent.event.started_date?.substr(11,5)}} PM 
-          - {{listDetailEvent.event.ending_date?.substr(11,5)}} AM
+          {{listDetailEvent.started_date?.substr(0,16)}}
+          - {{listDetailEvent.ending_date?.substr(0,16)}}
         
         </ion-label>
         </ion-col>
@@ -73,12 +73,12 @@
         <ion-col col-10>
         <ion-label>
           <ion-icon name="pin" slot="start"></ion-icon>
-          {{listDetailEvent.event.location['adress']}},{{listDetailEvent.event.location['city']}}
+          <!--{{listDetailEvent.location['address']}},{{listDetailEvent.location['city']}}-->
         </ion-label>
         </ion-col>
         <ion-col col-2 class="ion-text-right">
           <ion-label >
-            <a (click)='showMap(listDetailEvent.event.location)'>Show Map</a>
+            <a (click)='showMap(listDetailEvent.location)'>Show Map</a>
           </ion-label>
           </ion-col>
         </ion-row>
@@ -89,10 +89,10 @@
 
     <ion-row>
       <ion-col >
-      {{listDetailEvent.nb_person_interested}} Interested
+      {{listDetailEvent.interest_count}} Interested
     </ion-col>
     <ion-col >
-      {{listDetailEvent.nb_person_going}} Going
+      {{listDetailEvent.going_count}} Going
     </ion-col>
     </ion-row>
     <ion-row>
@@ -104,7 +104,7 @@
       </ion-row>
         <ion-row>
         <ion-col col-12 class="ion-text-justify">
-          {{listDetailEvent.event.description}}
+          {{listDetailEvent.description}}
         </ion-col>
       </ion-row>
   </ion-card-content>

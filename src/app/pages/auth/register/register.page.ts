@@ -244,9 +244,10 @@ login(email,password){
   //test user 
   this.userService.user().subscribe(
     user => {
-      //if userclub or userinterer null
-      if( ((user.user_club_id == null) || (user.user_center_interest_id == null)) || ((user.user_club_id == null) && (user.user_center_interest_id == null)) ) {
-        //redirect to page check list club & ineterer
+      //if userclub null
+      if( user.user_club_id == null ) {
+        //redirect to page check list club
+        console.log('user_club_id ',user.user_club_id);
         this.router.navigate(['/checklist']);
       }
       else {
@@ -255,9 +256,10 @@ login(email,password){
             changeColorHome: "primary"
             }
         };
-        //redirect to dashbord
+        //redirect to home
         this.router.navigate(['/home'],navigationExtras);
       }
+      
     }
   );
     }

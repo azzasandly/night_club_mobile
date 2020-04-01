@@ -37,10 +37,6 @@ export class ClubPage   {
             "name": "Event"
         },
         {
-          "image": "prog.jpg",
-          "name": "Program"
-        },
-        {
           "image": "promos.jpg",
           "name": "Promos"
       },
@@ -110,11 +106,6 @@ export class ClubPage   {
   };
     //navigate to page event
     this.router.navigate(['/event'],navigationExtras);
-
-    }
-    else if (option == "Program"){
-      //get list program
-      console.log('in program ');
 
     }
     else if (option == "Promos"){

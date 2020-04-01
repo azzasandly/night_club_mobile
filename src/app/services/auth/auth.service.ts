@@ -126,10 +126,10 @@ this.secureStorage.create('my_store_name')
         //test user 
         this.userService.user().subscribe(
           user => {
-            console.log('uc ',user.user_club_id);
-            console.log('ui ',user.user_center_interest_id);
+            console.log('funct gettoken user clubs ',user.user_club_id);
+            
             //if userclub or userinterer null
-            if( ((user.user_club_id == null) || (user.user_center_interest_id == null)) || ((user.user_club_id == null) && (user.user_center_interest_id == null)) ) {
+            if( user.user_club_id == null ) {
               //redirect to page check list club & ineterer
     
               this.router.navigate(['/checklist']);

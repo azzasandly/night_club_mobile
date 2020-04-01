@@ -4,13 +4,148 @@ icon_left="back" ></app-custom-header>
 
 <ion-content>
 <h4 class="title">List Events</h4>
-<ion-grid>
-  <ion-row *ngFor="let le of listEvent">
-    <ion-col col-12 >
-      <app-custom-card nameClub="{{nameClub}}" [listEvent]="le"></app-custom-card>
-    </ion-col>
-  </ion-row>
-  </ion-grid>
+
+<ion-toolbar>  
+  <ion-segment (ionChange)="segmentChanged($event)" [(ngModel)]="segment" color="primary" scrollable>  
+    <ion-segment-button value="0">  
+      <ion-label>Sunday</ion-label>  
+      <ion-icon name="calendar"></ion-icon>  
+    </ion-segment-button>  
+    <ion-segment-button value="1">  
+      <ion-label>Monday</ion-label>  
+      <ion-icon name="calendar"></ion-icon>  
+    </ion-segment-button>  
+    <ion-segment-button value="2">  
+      <ion-label>Tuesday</ion-label>  
+      <ion-icon name="calendar"></ion-icon>  
+    </ion-segment-button>  
+    <ion-segment-button value="3">  
+      <ion-label>Wednesday</ion-label>  
+      <ion-icon name="calendar"></ion-icon>  
+    </ion-segment-button>  
+    <ion-segment-button value="4">  
+      <ion-label>Thursday</ion-label>  
+      <ion-icon name="calendar"></ion-icon>  
+    </ion-segment-button>  
+    <ion-segment-button value="5">  
+      <ion-label>Friday</ion-label>  
+      <ion-icon name="calendar"></ion-icon>  
+    </ion-segment-button>  
+    <ion-segment-button value="6">  
+      <ion-label>Saturday</ion-label>  
+      <ion-icon name="calendar"></ion-icon>  
+    </ion-segment-button>  
+
+  </ion-segment>  
+</ion-toolbar>  
+  
+<ion-slides #slides (ionSlideDidChange)="slideChanged()" >  
+    <!--Sunday-->
+    <ion-slide>
+      <ion-grid>
+        <ion-row *ngIf="listEvents['-0'] == undefined">
+          <ion-col col-12 >
+            <p>No event</p>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngFor="let list of listEvents['-0']">
+          <ion-col col-12 >
+            <app-custom-card nameClub="{{nameClub}}" dayEvent="-0" [listEvent]="list"></app-custom-card>
+          </ion-col>
+        </ion-row>
+        </ion-grid>
+    </ion-slide>  
+  <!--Monday-->
+  <ion-slide>
+    <ion-grid>
+      <ion-row *ngIf="listEvents['-1'] == undefined">
+        <ion-col col-12 >
+          <p>No event</p>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngFor="let list of listEvents['-1']">
+        <ion-col col-12 >
+          <app-custom-card nameClub="{{nameClub}}" dayEvent="-1" [listEvent]="list"></app-custom-card>
+        </ion-col>
+      </ion-row>
+      </ion-grid>
+  </ion-slide>   
+  <!--Tuesday-->
+  <ion-slide>
+    <ion-grid>
+      <ion-row *ngIf="listEvents['-2'] == undefined">
+        <ion-col col-12 >
+          <p>No event</p>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngFor="let list of listEvents['-2']">
+        <ion-col col-12 >
+          <app-custom-card nameClub="{{nameClub}}" dayEvent="-2" [listEvent]="list"></app-custom-card>
+        </ion-col>
+      </ion-row>
+      </ion-grid>
+  </ion-slide>   
+  <!--Wednesday-->
+  <ion-slide>
+    <ion-grid>
+      <ion-row *ngIf="listEvents['-3'] == undefined">
+        <ion-col col-12 >
+          <p>No event</p>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngFor="let list of listEvents['-3']">
+        <ion-col col-12 >
+          <app-custom-card nameClub="{{nameClub}}" dayEvent="-3" [listEvent]="list"></app-custom-card>
+        </ion-col>
+      </ion-row>
+      </ion-grid>
+  </ion-slide>   
+    <!--Thursday-->
+  <ion-slide>
+    <ion-grid>
+      <ion-row *ngIf="listEvents['-4'] == undefined">
+        <ion-col col-12 >
+          <p>No event</p>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngFor="let list of listEvents['-4']">
+        <ion-col col-12 >
+          <app-custom-card nameClub="{{nameClub}}" dayEvent="-4" [listEvent]="list"></app-custom-card>
+        </ion-col>
+      </ion-row>
+      </ion-grid>
+  </ion-slide>  
+    <!--Friday-->
+  <ion-slide>
+    <ion-grid>
+      <ion-row *ngIf="listEvents['-5'] == undefined">
+        <ion-col col-12 >
+          <p>No event</p>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngFor="let list of listEvents['-5']">
+        <ion-col col-12 >
+          <app-custom-card nameClub="{{nameClub}}" dayEvent="-5" [listEvent]="list"></app-custom-card>
+        </ion-col>
+      </ion-row>
+      </ion-grid>
+  </ion-slide>   
+  <!--Saturday-->
+  <ion-slide>
+    <ion-grid>
+      <ion-row *ngIf="listEvents['-6'] == undefined">
+        <ion-col col-12 >
+          <p>No event</p>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngFor="let list of listEvents['-6']">
+        <ion-col col-12 >
+          <app-custom-card nameClub="{{nameClub}}" dayEvent="-6" [listEvent]="list"></app-custom-card>
+        </ion-col>
+      </ion-row>
+      </ion-grid>
+  </ion-slide>    
+</ion-slides>  
 
 
 </ion-content>

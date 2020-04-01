@@ -16,6 +16,8 @@ export class CustomCardComponent implements OnInit {
   @Input() listProgram : any = [];
   @Input() listPromos : any = [];
   @Input() nameClub : string ;
+  @Input() dayEvent : any ;
+
   id_club: number = 0;
 
   constructor( private navExtras: NavExtrasServiceService,
@@ -32,7 +34,7 @@ export class CustomCardComponent implements OnInit {
   }
 
   detailEvent(levent: any ){
-    this.eventPage.detailEvent(levent,this.nameClub);
+    this.eventPage.detailEvent(levent,this.nameClub,this.dayEvent);
   }
   //add interest to event
   presentActionSheet(id_event: number){

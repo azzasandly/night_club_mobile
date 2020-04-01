@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DashboardPage } from 'src/app/pages/dashboard/dashboard.page';
+
 import { Router, NavigationExtras, ActivatedRoute } from '@angular/router';
 import { NavParams } from '@ionic/angular';
 

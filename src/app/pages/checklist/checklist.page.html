@@ -1,25 +1,11 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>checklist</ion-title>
+    <ion-title>Checklist</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
-  <div class="checkcenter" *ngIf="showcenter">
-    <ion-list>
-      <ion-list-header>Choose your area of interest</ion-list-header>
-        <ion-item *ngFor="let ci of centerinterer">
-          <ion-label>{{ci.name}}</ion-label>
-          <ion-checkbox [value]="ci.id" color="primary"  slot="start" (ionChange)="addcenterinterer($event)"></ion-checkbox>
-        </ion-item>
-      </ion-list>
-    
-    <ion-button ion-button outline color="secondary" (click)='continue()'>
-      Continue
-      <ion-icon slot="end" name="arrow-forward"></ion-icon>
-    </ion-button>
-  </div>
-  <div class="checkclubs" *ngIf="!showcenter">
+  <div class="checkclubs" >
     <ion-list>
       <ion-list-header>Choose your Clubs</ion-list-header>
         <ion-item *ngFor="let c of club">

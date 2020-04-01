@@ -1,12 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { MenuController, NavController, PopoverController } from '@ionic/angular';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MenuController, NavController, PopoverController, IonSlides } from '@ionic/angular';
 import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
 import { AlertService } from 'src/app/services/alert.service';
 import { ClubService } from 'src/app/services/club/club.service';
 import { EventService } from 'src/app/services/event/event.service';
 import { NavExtrasServiceService } from 'src/app/services/navigation/nav-extras-service.service';
 import { ActionSheetController } from '@ionic/angular';
-import { MapComponent } from 'src/app/components/map/map.component';
 
 @Component({
   selector: 'app-event',
@@ -14,12 +13,14 @@ import { MapComponent } from 'src/app/components/map/map.component';
   styleUrls: ['./event.page.scss'],
 })
 export class EventPage   {
-  listEvent : any = [];
-  id_club: number = 0;
+  listEvents : any = [];
+  club_id: number = 0;
   nameClub: String;
-  myEventSet : any;
   actionSheet:any;
-  todaydate:any;
+  available_event:boolean;
+
+  @ViewChild('slides', { static: true }) slider: IonSlides;  
+  segment = 0;  
 
   constructor(private menu: MenuController,
     private clubService: ClubService,
@@ -32,33 +33,31 @@ export class EventPage   {
     public actionSheetController: ActionSheetController,
     public popoverCtrl: PopoverController) { 
       this.menu.enable(true);
-
-      this.listEvent = this.listEvent.map(item => (
-        {
-        ...item,
-        showMore: false
-      }));
     }
+
+    async segmentChanged(ev: any) {  
+      await this.slider.slideTo(this.segment);  
+    }  
+    async slideChanged() {  
+      this.segment = await this.slider.getActiveIndex();  
+    }  
+
 
 
   ionViewWillEnter() {
     this.ListEvent();
-    let datetoday = new Date().toISOString();
-    let rep1 = datetoday.replace("T", " ");
-     this.todaydate = rep1.substr(0, 19);
-    console.log('today ',this.todaydate);
   }
 ListEvent(){
       //get id club from params
       this.route.queryParams.subscribe((res)=>{
-        this.id_club = res['idclub'];
+        this.club_id = res['idclub'];
         this.nameClub = res['name'];
     });
     //get list event
-  this.eventService.listEvent(this.id_club).subscribe(
+  this.eventService.getEvent(this.club_id).subscribe(
     data => {
       console.log('data event ',data);
-      this.listEvent = data;
+      this.listEvents = data;
     },
     error => {
       console.log(error);
@@ -69,27 +68,14 @@ ListEvent(){
   );
 }
 
-/*async showMap(ev: any){
-  const popover = await this.popoverCtrl.create({  
-    component: MapComponent,  
-    componentProps: {latitude: this.location.latitude,
-                      longitude: this.location.longitude,
-                      locationName: this.location.location_name
-    } ,
-    event: ev,  
-    animated: true,  
-    showBackdrop: true,
-});  
-return await popover.present();  
-}*/
-
-detailEvent(levent: any , nameclu){
+detailEvent(levent: any , nameclu, dayEvent){
   this.navExtras.setExtras(levent);
         //send detail event & name club in params
         let navigationExtras: NavigationExtras = {
           queryParams: {
             name: nameclu,
-            idClub: this.id_club
+            idClub: this.club_id,
+            dayEvent: dayEvent
             }
       };
         //navigate to page details event

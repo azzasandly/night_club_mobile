@@ -17,10 +17,6 @@ const routes: Routes = [
    { path: 'register',
    loadChildren: './pages/auth/register/register.module#RegisterPageModule',canActivate: [SlideGuard]
   },
-  
-  { path: 'dashboard',
-   loadChildren: './pages/dashboard/dashboard.module#DashboardPageModule', canActivate: [AuthGuard] 
-  },
  
   {path: 'checklist',
    loadChildren: './pages/checklist/checklist.module#ChecklistPageModule', canActivate: [AuthGuard] 

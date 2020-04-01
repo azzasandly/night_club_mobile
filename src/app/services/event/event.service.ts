@@ -24,11 +24,10 @@ export class EventService {
     private authService: AuthService,
     private navExtras: NavExtrasServiceService,) { }
 
-  //list events
-  listEvent(id_club: number) {
+  //get list events
+  getEvent(club_id: number) {
 
-    return this.http.post(this.env.API_URL_EVENT + 'listevent',
-    {idclub:id_club})
+    return this.http.get(this.env.API_URL_EVENT + club_id)
     .pipe(
       tap(event => {
         return event;
